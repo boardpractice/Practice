@@ -7,21 +7,18 @@
 /*
 작성일시 : 2023-02-22
 작성자 : EdenDev
-작성시간 : 오전 9:30
-용도 : Handles requests for the application home page
+작성시간 : 오후 1:22
+용도 : 
 */
 
-package com.spring.practice.main.controller;
+package com.spring.practice.commons.annotation;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import com.spring.practice.commons.annotation.LogException;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface LogException {
 
-@Controller
-public class HomeController {
-    @GetMapping(value = "/")
-    @LogException
-    public String homePage() {
-        return "home";
-    }
 }
