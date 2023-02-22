@@ -23,7 +23,7 @@ Purpose : left menu bar include jsp file
             <c:choose>
                 <c:when test="${empty sessionUser}">
                     <div class="pull-left image">
-                        <img src="../dist/img/default-user-image.jpg" class="img-circle" alt="User Image">
+                        <img src="/resources/dist/img/default-user-image.jpg" class="img-circle" alt="User Image">
                     </div>
 
                     <div class="pull-left info">

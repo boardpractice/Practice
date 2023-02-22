@@ -28,5 +28,3 @@ Purpose : plugin java script include  jsp file
 <!-- DataTables -->
 <script src="/resources/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="/resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- related user java script -->
-<script src="/resources/dist/js/user/relatedUser.js" type="text/javascript"></script>
