@@ -22,7 +22,10 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.spring.practice.*.*" />
-	
-	
+
+	<!-- 예외 에러페이지 커스텀 마이징 -->
+	<beans:bean class="com.spring.practice.commons.exception.CustomExceptionReSolver">
+		<beans:property name="order" value="1"/>
+	</beans:bean>
 	
 </beans:beans>
