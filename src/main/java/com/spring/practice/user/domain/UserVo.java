@@ -13,22 +13,49 @@
 
 package com.spring.practice.user.domain;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 public class UserVo {
-
     private int user_no; // 유저 번호
+
+    @NotNull
+    @Pattern(regexp = "^(?=.*[a-zA-z])(?=.*[0-9])(?!.*[^a-zA-z0-9]).{5,10}")
     private String user_id; // 유저 아아디
+
+    @NotNull
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,30}$")
     private String user_pw; // 유저 비밀번호
+
+    @NotNull
+    @Pattern(regexp = "^[가-힣].{1,10}$")
     private String user_nickname; // 유저 닉네임
+
+    @NotNull
     private String user_image; // 프로필 이미지
+
+    @NotNull
     private String user_gender; // 유저 성별
+
+    @Past
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date user_birth; // 유저 생년월일
+
+    @NotNull
+    @Length(max = 13)
+    @Pattern(regexp = "^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$")
     private String user_phone; // 유저 휴대폰 번호
+
+    @NotNull
+    @Pattern(regexp = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$")
     private String user_email; // 유저 이메일
+
     private String user_status; // 유저 상태
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date user_join_date; // 유저 가입 일자

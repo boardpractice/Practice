@@ -36,4 +36,11 @@
     <aop:config>
     </aop:config>
 
+    <!-- messageSource -->
+    <beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <beans:property name="basename" value="/WEB-INF/spring/message/message"/>
+        <beans:property name="defaultEncoding" value="UTF-8"/>
+        <beans:property name="cacheSeconds" value="60"/>
+    </beans:bean>
+
 </beans:beans>
