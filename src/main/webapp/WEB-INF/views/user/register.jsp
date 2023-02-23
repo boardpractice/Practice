@@ -90,8 +90,10 @@ Purpose : Web Register View Page
                             </div>
 
                             <div class="row mt-1">
-                                <form:input type="text" id="userNickName" class="form-control" path="user_nickname"
-                                            placeholder="닉네임을 입력해주세요"/>
+                                <div class="col-lg-5">
+                                    <form:input type="text" id="userNickName" class="form-control" path="user_nickname"
+                                                placeholder="닉네임을 입력해주세요"/>
+                                </div>
                             </div>
 
                             <div class="row mt-1">
