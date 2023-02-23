@@ -83,7 +83,7 @@ Purpose : Web Register View Page
                                 </div>
 
                                 <div class="row mt-1">
-                                    <div class="col-ls-5" id="alertPassword2"></div>
+                                    <div class="col-ls-5" id="alterPassword2"></div>
                                 </div>
 
                                 <div class="row mt-1">
@@ -211,10 +211,5 @@ Purpose : Web Register View Page
 </div>
 
 <%@ include file="../include/plugin_js.jsp" %>
-<script type="text/javascript">
-    $("#joinButton").click(function () {
-        $("#insertForm").submit();
-    });
-</script>
 </body>
 </html>

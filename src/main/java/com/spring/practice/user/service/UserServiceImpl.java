@@ -31,4 +31,32 @@ public class UserServiceImpl implements UserService {
     public void insertUser(UserVo param) {
         userDAO.insertUser(param);
     }
+
+    //  아이디 중복체크
+    @Override
+    @LogException
+    public boolean isExistId(String user_id) {
+        return userDAO.isExistId(user_id) > 0;
+    }
+
+    //  닉네임 중복체크
+    @Override
+    @LogException
+    public boolean isExistNickName(String user_nickname) {
+        return userDAO.isExistNickName(user_nickname) > 0;
+    }
+
+    //  휴대폰 중복체크
+    @Override
+    @LogException
+    public boolean isExistPhone(String user_phone) {
+        return userDAO.isExistPhone(user_phone) > 0;
+    }
+
+    //  이메일 중복체크
+    @Override
+    @LogException
+    public boolean isExistEmail(String user_email) {
+        return userDAO.isExistEmail(user_email) > 0;
+    }
 }

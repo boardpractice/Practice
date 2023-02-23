@@ -32,4 +32,32 @@ public class UserDAOImpl implements UserDAO {
     public void insertUser(UserVo param) {
         sqlSession.insert(NAMESPACE + ".insertUser", param);
     }
+
+    //  아이디 중복체크
+    @Override
+    @LogException
+    public int isExistId(String user_id) {
+        return sqlSession.selectOne(NAMESPACE + ".isExistId", user_id);
+    }
+
+    //  닉네임 중복체크
+    @Override
+    @LogException
+    public int isExistNickName(String user_nickname) {
+        return sqlSession.selectOne(NAMESPACE + ".isExistNickName", user_nickname);
+    }
+
+    //  휴대폰 중복체크
+    @Override
+    @LogException
+    public int isExistPhone(String user_phone) {
+        return sqlSession.selectOne(NAMESPACE + ".isExistPhone", user_phone);
+    }
+
+    //  이메일 중복체크
+    @Override
+    @LogException
+    public int isExistEmail(String user_email) {
+        return sqlSession.selectOne(NAMESPACE + ".isExistEmail", user_email);
+    }
 }

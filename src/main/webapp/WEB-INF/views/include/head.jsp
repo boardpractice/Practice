@@ -64,3 +64,12 @@ Purpose :  head tag include jsp file
     <script src="http://lab.alexcican.com/set_cookies/cookie.js" type="text/javascript"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
+
+
+<div id="loading">
+    <div id="loading_bar">
+        <!-- 로딩바의 경로를 img 태그안에 지정해준다. -->
+        <img src="/resources/dist/img/loading.gif">
+        <p style="font-size: x-large; font-weight: bold;">로딩 중 입니다 ...</p>
+    </div>
+</div>

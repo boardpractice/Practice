@@ -28,3 +28,18 @@ Purpose : plugin java script include  jsp file
 <!-- DataTables -->
 <script src="/resources/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="/resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- related user java script -->
+<script src="/resources/dist/js/user/relatedUser.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).ajaxStart(function () {
+            $('#loading').show(); // ajax 시작 -> 로딩바 표출
+        });
+
+        $(document).ajaxStop(function () {
+            $('#loading').hide(); // ajax 끝 -> 로딩바 히든
+        });
+
+        $("#loading").hide();
+    });
+</script>
