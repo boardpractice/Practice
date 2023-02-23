@@ -52,4 +52,10 @@ public class UserController {
 
         return "redirect:../";
     }
+
+    //  로그인 페이지
+    @GetMapping(value = "login")
+    public String login() {
+        return "user/login";
+    }
 }

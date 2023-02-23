@@ -97,8 +97,7 @@ Purpose : top menu bar include jsp file
                                                 class="fa fa-user-plus"></i><b> 회원가입</b></a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-primary btn-flat" data-toggle="modal"
-                                           data-target="#userLoginModel"><i
+                                        <a href="../user/login" class="btn btn-primary btn-flat"><i
                                                 class="glyphicon glyphicon-log-in"></i><b> 로그인</b></a>
                                     </div>
                                 </li>

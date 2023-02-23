@@ -14,6 +14,7 @@
 package com.spring.practice.user.persistence;
 
 import com.spring.practice.commons.annotation.LogException;
+import com.spring.practice.user.domain.LoginDTO;
 import com.spring.practice.user.domain.UserVo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,12 @@ public class UserDAOImpl implements UserDAO {
     @LogException
     public int isExistEmail(String user_email) {
         return sqlSession.selectOne(NAMESPACE + ".isExistEmail", user_email);
+    }
+
+    //  로그인
+    @Override
+    @LogException
+    public UserVo selectByIdAndPw(LoginDTO dto) {
+        return sqlSession.selectOne(NAMESPACE + ".selectByIdAndPw", dto);
     }
 }

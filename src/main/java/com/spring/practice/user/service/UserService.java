@@ -13,6 +13,7 @@
 
 package com.spring.practice.user.service;
 
+import com.spring.practice.user.domain.LoginDTO;
 import com.spring.practice.user.domain.UserVo;
 
 public interface UserService {
@@ -31,4 +32,7 @@ public interface UserService {
 
     //  이메일 중복체크
     public boolean isExistEmail(String user_email);
+
+    //  로그인
+    public UserVo login(LoginDTO dto);
 }

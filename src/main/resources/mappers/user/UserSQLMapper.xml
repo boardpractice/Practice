@@ -39,4 +39,9 @@
     <select id="isExistEmail" resultType="int">
         select count(*) from eden_user where user_email = #{user_email}
     </select>
+
+    <!-- 로그인 -->
+    <select id="selectByIdAndPw" resultType="UserVo">
+        select * from eden_user where user_id = #{user_id}
+    </select>
 </mapper>

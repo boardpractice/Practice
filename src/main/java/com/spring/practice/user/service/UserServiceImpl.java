@@ -14,6 +14,7 @@
 package com.spring.practice.user.service;
 
 import com.spring.practice.commons.annotation.LogException;
+import com.spring.practice.user.domain.LoginDTO;
 import com.spring.practice.user.domain.UserVo;
 import com.spring.practice.user.persistence.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,12 @@ public class UserServiceImpl implements UserService {
     @LogException
     public boolean isExistEmail(String user_email) {
         return userDAO.isExistEmail(user_email) > 0;
+    }
+
+    //  로그인
+    @Override
+    @LogException
+    public UserVo login(LoginDTO dto) {
+        return userDAO.selectByIdAndPw(dto);
     }
 }

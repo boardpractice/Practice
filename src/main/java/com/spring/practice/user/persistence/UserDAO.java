@@ -13,6 +13,7 @@
 
 package com.spring.practice.user.persistence;
 
+import com.spring.practice.user.domain.LoginDTO;
 import com.spring.practice.user.domain.UserVo;
 
 public interface UserDAO {
@@ -31,4 +32,7 @@ public interface UserDAO {
 
     //  이메일 중복체크
     public int isExistEmail(String user_email);
+
+    //  로그인
+    public UserVo selectByIdAndPw(LoginDTO loginDto);
 }
