@@ -29,7 +29,7 @@ Purpose : Web Register View Page
         <section class="content container-fluid">
             <div class="register-box-body">
                 <p class="login-box-msg">회원가입 페이지</p>
-                <form action="${path}/user/insertUserProcess" id="insertForm" method="post">
+                <form:form action="${path}/user/insertUserProcess" modelAttribute="userVo" id="insertForm" method="post">
                     <div class="row mt-2">
                         <div class="col">
                             <div class="row mt-1">
@@ -40,13 +40,13 @@ Purpose : Web Register View Page
 
                             <div class="row mt-1">
                                 <div class="col-lg-5">
-                                    <input type="text" id="joinIdInput" class="form-control" name="user_id"
-                                           placeholder="아이디를 입력하세요요">
+                                    <form:input type="text" id="joinIdInput" class="form-control" path="user_id"
+                                                placeholder="아이디를 입력하세요"/>
                                 </div>
                             </div>
 
                             <div class="row mt-1">
-                                <div class="col-lg-5" id="alertId"><form:errors path="user_id" id="error_message" /></div>
+                                <div class="col-lg-5" id="alertId"><form:errors path="user_id" id="error_message"/></div>
                             </div>
 
                             <div class="row mt-1">
@@ -57,15 +57,13 @@ Purpose : Web Register View Page
 
                             <div class="row mt-1">
                                 <div class="col-lg-5">
-                                    <input type="password" id="changePassword" class="form-control" name="user_pw"
-                                           placeholder="비밀번호를 입력하세요">
+                                    <form:input type="password" id="changePassword" class="form-control"
+                                                placeholder="비밀번호를 입력하세요" path="user_pw"/>
                                 </div>
                             </div>
 
                             <div class="row mt-1">
-                                <div class="col-lg-5">
-                                    <div class="col-lg-5" id="alterPassword"><form:errors path="user_pw" id="error_message" /></div>
-                                </div>
+                                <div class="col-lg-5" id="alterPassword"><form:errors path="user_pw" id="error_message"/></div>
                             </div>
 
                             <div class="row mt-1">
@@ -76,7 +74,7 @@ Purpose : Web Register View Page
 
                             <div class="row mt-1">
                                 <div class="col-lg-5">
-                                    <input type="password" id="confirmPassword" class="form-control" name="user_pw"
+                                    <input type="password" id="confirmPassword" class="form-control"
                                            placeholder="비밀번호를 한번 더 입력해주세요">
                                 </div>
                             </div>
@@ -92,14 +90,12 @@ Purpose : Web Register View Page
                             </div>
 
                             <div class="row mt-1">
-                                <div class="col-lg-5">
-                                    <input type="text" id="userNickName" class="form-control" name="user_nickname"
-                                           placeholder="닉네임을 입력해주세요">
-                                </div>
+                                <form:input type="text" id="userNickName" class="form-control" path="user_nickname"
+                                            placeholder="닉네임을 입력해주세요"/>
                             </div>
 
                             <div class="row mt-1">
-                                <div class="col-lg-5" id="alertNickName"><form:errors path="user_nickname" id="error_message" /></div>
+                                <div class="col-lg-5" id="alertNickName"><form:errors path="user_nickname" id="error_message"/></div>
                             </div>
 
                             <div class="row mt-1">
@@ -116,7 +112,7 @@ Purpose : Web Register View Page
                             </div>
 
                             <div class="row mt-1">
-                                <div class="col-lg-5" id="alertGender"><form:errors path="user_gender" id="error_message" /></div>
+                                <div class="col-lg-5" id="alertGender"><form:errors path="user_gender" id="error_message"/></div>
                             </div>
 
                             <div class="row mt-1">
@@ -127,13 +123,13 @@ Purpose : Web Register View Page
 
                             <div class="row mt-1">
                                 <div class="col-lg-5">
-                                    <input type="date" id="userBirth" class="form-control" name="user_birth"
-                                           placeholder="생년월일을 선택해주세요">
+                                    <form:input type="date" id="userBirth" class="form-control" path="user_birth"
+                                                placeholder="생년월일을 선택해주세요"/>
                                 </div>
                             </div>
 
                             <div class="row mt-1">
-                                <div class="col-lg-5" id="alertBirth"><form:errors path="user_birth" id="error_message" /></div>
+                                <div class="col-lg-5" id="alertBirth"><form:errors path="user_birth"/></div>
                             </div>
 
                             <div class="row mt-1">
@@ -144,13 +140,13 @@ Purpose : Web Register View Page
 
                             <div class="row mt-1">
                                 <div class="col-lg-5">
-                                    <input type="text" id="userPhone" class="form-control" name="user_phone"
-                                           placeholder="휴대폰번호를 입력해주세요">
+                                    <form:input type="text" id="userPhone" class="form-control" path="user_phone"
+                                                placeholder="휴대폰번호를 입력해주세요"/>
                                 </div>
                             </div>
 
                             <div class="row mt-1">
-                                <div class="col-lg-5" id="alertPhone"><form:errors path="user_phone" id="error_message" /></div>
+                                <div class="col-lg-5" id="alertPhone"><form:errors path="user_phone" id="error_message"/></div>
                             </div>
 
                             <div class="row mt-1">
@@ -158,11 +154,15 @@ Purpose : Web Register View Page
                                     <label for="userEmail">이메일</label>
                                 </div>
                             </div>
+
                             <div class="row mt-1">
                                 <div class="col-lg-5">
-                                    <input type="text" id="userEmail" class="form-control" name="user_email"
-                                           placeholder="이메일주소를 입력해주세요">
+                                    <form:input type="text" id="userEmail" class="form-control" path="user_email"
+                                                placeholder="이메일주소를 입력해주세요"/>
                                 </div>
+                            </div>
+
+                            <div class="row mt-1">
                                 <div class="col d-grid">
                                     <button type="button" id="checkEmailButton"
                                             class="btn btn-primary" style="height:36px;" disabled='disabled'>인증번호 발송
@@ -171,7 +171,7 @@ Purpose : Web Register View Page
                             </div>
 
                             <div class="row mt-1">
-                                <div class="col" id="alertEmail"><form:errors path="user_email" id="error_message" /></div>
+                                <div class="col-lg-5" id="alertEmail"><form:errors path="user_email" id="error_message"/></div>
                             </div>
 
                             <div class="row mt-1">
@@ -195,14 +195,14 @@ Purpose : Web Register View Page
                             <div class="row mt-1">
                                 <div class="col-lg-5">
                                     <a type="button" class="btn btn-default pull-left" href="../main/main">취소</a>
-                                    <button type="button" class="btn btn-primary infoModBtn pull-right" id="joinButton">
-                                        가입하기
+                                    <button type="button" class="btn btn-primary infoModBtn pull-right" id="joinButton">가입하기
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
+                    <input type="hidden" id="user_image" name="user_image" value="default-user-image.jpg">
+                </form:form>
             </div>
         </section>
     </div>
