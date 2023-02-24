@@ -6,6 +6,7 @@
 
     <typeAliases>
         <typeAlias type="com.spring.practice.user.domain.UserVo" alias="UserVo" />
+        <typeAlias type="com.spring.practice.user.domain.QuestionVo" alias="QuestionVo" />
     </typeAliases>
 
 </configuration>

@@ -19,6 +19,7 @@ import com.spring.practice.user.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,28 +35,26 @@ public class UserController {
     //  회원가입 페이지
     @GetMapping(value = "register")
     @LogException
-    public String registerPage(@ModelAttribute("userVo") UserVo param) {
+    public String register(Model model, @ModelAttribute("userVo") UserVo param) {
+
+        model.addAttribute("data", userService.getJoinQuestionList());
+
         return "user/register";
     }
 
     //  회원가입 프로세스
     @PostMapping(value = "insertUserProcess")
-    public String insertUserProcess(@Valid UserVo param, BindingResult result) {
+    @LogException
+    public String insertUserProcess(Model model, @Valid UserVo param, BindingResult result) {
 
         if (result.hasErrors()) {
+
+            model.addAttribute("data", userService.getJoinQuestionList());
+
             return "user/register";
         }
-        String hashPw = BCrypt.hashpw(param.getUser_pw(), BCrypt.gensalt());
-        param.setUser_pw(hashPw);
 
         userService.insertUser(param);
-
-        return "redirect:../";
-    }
-
-    //  로그인 페이지
-    @GetMapping(value = "login")
-    public String login() {
-        return "user/login";
+        return "redirect:../main/main";
     }
 }

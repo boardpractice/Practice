@@ -15,10 +15,14 @@ package com.spring.practice.user.persistence;
 
 import com.spring.practice.commons.annotation.LogException;
 import com.spring.practice.user.domain.LoginDTO;
+import com.spring.practice.user.domain.QuestionVo;
 import com.spring.practice.user.domain.UserVo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.HashMap;
+import java.util.List;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -67,5 +71,38 @@ public class UserDAOImpl implements UserDAO {
     @LogException
     public UserVo selectByIdAndPw(LoginDTO dto) {
         return sqlSession.selectOne(NAMESPACE + ".selectByIdAndPw", dto);
+    }
+
+    //  아이디 찾기
+    @Override
+    @LogException
+    public HashMap<String, Object> getUserIdByNickNameAndEmail(UserVo param) {
+        return sqlSession.selectOne(NAMESPACE + ".getUserIdByNickNameAndEmail", param);
+    }
+
+    //  비밀번호 찾기 질문
+    @Override
+    @LogException
+    public List<QuestionVo> getJoinQuestionList() {
+        return sqlSession.selectList(NAMESPACE + ".getJoinQuestionList");
+    }
+
+    // 비밀번호 찾기 질문 조회
+    @Override
+    @LogException
+    public HashMap<String, Object> getUserQuestionById(UserVo param) {
+        return sqlSession.selectOne(NAMESPACE + ".getUserQuestionById", param);
+    }
+
+    //  비밀번호 찾기 질문 답변
+    public UserVo getUserPwByfindAnswer(UserVo param) {
+        return sqlSession.selectOne(NAMESPACE + ".getUserPwByfindAnswer", param);
+    }
+
+    //  임시 비밀번호 발급
+    @Override
+    @LogException
+    public void getUserUpdatePw(UserVo param) {
+        sqlSession.update(NAMESPACE + ".getUserUpdatePw", param);
     }
 }

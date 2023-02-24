@@ -16,7 +16,8 @@ Purpose : plugin java script include  jsp file
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ include file="include/head.jsp"%>
+<%@ include file="include/head.jsp" %>
+<%@ include file="include/user_menu.jsp" %>
 
 <html>
 

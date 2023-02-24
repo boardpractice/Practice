@@ -15,10 +15,14 @@ package com.spring.practice.user.service;
 
 import com.spring.practice.commons.annotation.LogException;
 import com.spring.practice.user.domain.LoginDTO;
+import com.spring.practice.user.domain.QuestionVo;
 import com.spring.practice.user.domain.UserVo;
 import com.spring.practice.user.persistence.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -66,5 +70,36 @@ public class UserServiceImpl implements UserService {
     @LogException
     public UserVo login(LoginDTO dto) {
         return userDAO.selectByIdAndPw(dto);
+    }
+
+    //  아이디 찾기
+    @Override
+    @LogException
+    public HashMap<String, Object> getUserIdByNickNameAndEmail(UserVo param) {
+        return userDAO.getUserIdByNickNameAndEmail(param);
+    }
+
+    // 비밀번호 찾기 질문
+    @Override
+    @LogException
+    public List<QuestionVo> getJoinQuestionList() {
+        return userDAO.getJoinQuestionList();
+    }
+
+    //  비밀번호 찾기 질문 조회
+    @Override
+    @LogException
+    public HashMap<String, Object> getUserQuestionById(UserVo param) {
+        return userDAO.getUserQuestionById(param);
+    }
+
+    //  비밀번호 질문 답변
+    public UserVo getUserPwByfindAnswer(UserVo param) {
+        return userDAO.getUserPwByfindAnswer(param);
+    }
+
+    //  임시 비밀번호 발급
+    public void getUserUpdatePw(UserVo param) {
+        userDAO.getUserUpdatePw(param);
     }
 }

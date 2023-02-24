@@ -12,6 +12,7 @@
 */
 
 package com.spring.practice.user.controller;
+
 import com.spring.practice.commons.annotation.LogException;
 import com.spring.practice.user.domain.LoginDTO;
 import com.spring.practice.user.domain.UserVo;
@@ -127,15 +128,15 @@ public class RestUserController {
             MimeMessageHelper mailHelper = new MimeMessageHelper(mail, "UTF-8");
 
             // 메일 내용을 채워줌
-            mailHelper.setFrom(from, "관리자");	// 보내는 사람 셋팅
-            mailHelper.setTo(user_email);		// 받는 사람 셋팅
-            mailHelper.setSubject(subject);	// 제목 셋팅
-            mailHelper.setText(content);	// 내용 셋팅
+            mailHelper.setFrom(from, "관리자");    // 보내는 사람 셋팅
+            mailHelper.setTo(user_email);        // 받는 사람 셋팅
+            mailHelper.setSubject(subject);    // 제목 셋팅
+            mailHelper.setText(content);    // 내용 셋팅
 
             // 메일 전송
             javaMailSender.send(mail);
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -203,6 +204,78 @@ public class RestUserController {
 
         session.removeAttribute("sessionUser");
         session.invalidate();
+        return data;
+    }
+
+    //  아이디 찾기
+    @PostMapping("getUserIdByNickNameAndEmail")
+    @LogException
+    public HashMap<String, Object> getUserIdByNickNameAndEmail(UserVo param) {
+
+        HashMap<String, Object> data = new HashMap<>();
+
+        HashMap<String, Object> userInfo = userService.getUserIdByNickNameAndEmail(param);
+
+        if (userInfo == null) {
+            data.put("result", "fail");
+        } else {
+            data.put("result", "success");
+            data.put("userInfo", userInfo);
+        }
+
+        System.out.println(data.get("userInfo"));
+
+        return data;
+    }
+
+    //  비밀번호 찾기 질문 조회
+    @PostMapping(value = "getUserQuestionById")
+    @LogException
+    public HashMap<String, Object> getUserQuestionById(UserVo param) {
+
+        HashMap<String, Object> data = new HashMap<>();
+
+        HashMap<String, Object> userInfo = userService.getUserQuestionById(param);
+
+        if (userInfo == null) {
+            data.put("result", "fail");
+        } else {
+            data.put("userInfo", userInfo);
+        }
+
+        return data;
+    }
+
+    //  비밀번호 질문 답변 조회
+    @PostMapping(value = "getUserPwByfindAnswer")
+    @LogException
+    public HashMap<String, Object> getUserPwByfindAnswer(UserVo param) {
+        HashMap<String, Object> data = new HashMap<>();
+        UserVo userInfo = userService.getUserPwByfindAnswer(param);
+
+        if (userInfo == null) {
+            data.put("result", "fail");
+        } else {
+            data.put("result", "success");
+        }
+        return data;
+    }
+
+    //  비밀번호 찾기 - 수정
+    @PostMapping("getUserUpdatePw")
+    @LogException
+    public HashMap<String, Object> getUserUpdatePw(UserVo param) {
+
+        HashMap<String, Object> data = new HashMap<String, Object>();
+        boolean exist = userService.isExistId(param.getUser_id());
+        if (exist) {
+            data.put("result", "success");
+            String password = BCrypt.hashpw(param.getUser_pw(), BCrypt.gensalt());
+            param.setUser_pw(password);
+            userService.getUserUpdatePw(param);
+        } else {
+            data.put("result", "fail");
+        }
         return data;
     }
 }
