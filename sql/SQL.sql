@@ -60,3 +60,5 @@ INSERT INTO eden_find_question(question_no, question_content)
 VALUES (eden_find_question_seq.nextval, '가장 좋아하는 색깔은 무엇 입니까?');
 INSERT INTO eden_find_question(question_no, question_content)
 VALUES (eden_find_question_seq.nextval, '가장 좋아하는 음식은 무엇 입니까?');
+
+update eden_user set user_status = 'active' where user_no = 24;

@@ -16,13 +16,13 @@ package com.spring.practice.user.controller;
 import com.spring.practice.commons.annotation.LogException;
 import com.spring.practice.user.domain.UserVo;
 import com.spring.practice.user.service.UserService;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -56,5 +56,15 @@ public class UserController {
 
         userService.insertUser(param);
         return "redirect:../main/main";
+    }
+
+    // 내정보 페이지
+    @GetMapping("profile")
+    public String profile(Model model, HttpSession session) {
+        UserVo sessionUser = (UserVo) session.getAttribute("sessionUser");
+
+        model.addAttribute("data", userService.getJoinQuestionList());
+
+        return "user/profile";
     }
 }

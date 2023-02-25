@@ -102,4 +102,23 @@ public class UserServiceImpl implements UserService {
     public void getUserUpdatePw(UserVo param) {
         userDAO.getUserUpdatePw(param);
     }
+
+    // 회원정보 조회
+    public UserVo getUser(String user_id) {
+        return userDAO.getUser(user_id);
+    }
+
+    //  회원정보 수정
+    @Override
+    @LogException
+    public void updateUserInfo(UserVo param) {
+        userDAO.updateUserInfo(param);
+    }
+
+    //  회원정보 탈퇴
+    @Override
+    @LogException
+    public void deleteUserInfoByUserNo(UserVo param) {
+        userDAO.deleteUserInfoByUserNo(param);
+    }
 }

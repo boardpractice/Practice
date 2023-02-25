@@ -15,12 +15,14 @@ package com.spring.practice.user.controller;
 
 import com.spring.practice.commons.annotation.LogException;
 import com.spring.practice.user.domain.LoginDTO;
+import com.spring.practice.user.domain.QuestionVo;
 import com.spring.practice.user.domain.UserVo;
 import com.spring.practice.user.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +33,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 @RestController
@@ -275,6 +279,85 @@ public class RestUserController {
             userService.getUserUpdatePw(param);
         } else {
             data.put("result", "fail");
+        }
+        return data;
+    }
+
+    //  회원정보 수정
+    @PostMapping("updateUserInfo")
+    public HashMap<String, Object> updateUserInfo(UserVo param, HttpSession session) {
+
+        HashMap<String, Object> data = new HashMap<String, Object>();
+
+        UserVo sessionUser = userService.getUser(param.getUser_id());
+
+        if (sessionUser != null) {
+            data.put("result", "success");
+            userService.updateUserInfo(param);
+        } else {
+            data.put("result", "fail");
+        }
+        return data;
+    }
+
+    //  현재 비밀번호 체크
+    @PostMapping("checkPw")
+    @LogException
+    public HashMap<String, Object> checkPw(String current_password, String user_id) {
+
+        HashMap<String, Object> data = new HashMap<>();
+
+        UserVo userVo = userService.getUser(user_id);
+
+        if (userVo != null) {
+            if (BCrypt.checkpw(current_password, userVo.getUser_pw())) {
+                data.put("result", "success");
+            } else {
+                data.put("result", "fail");
+            }
+        }
+
+        return data;
+    }
+
+    //  비밀번호 수정
+    @PostMapping(value = "modifyPassword")
+    @LogException
+    public HashMap<String, Object> modifyPassword(UserVo userVo, HttpSession session) {
+
+        HashMap<String, Object> data = new HashMap<>();
+
+        UserVo sessionUser = userService.getUser(userVo.getUser_id());
+
+        if (sessionUser != null) {
+
+            /* 비밀번호 변경 */
+            String changePassword = BCrypt.hashpw(userVo.getUser_pw(), BCrypt.gensalt());
+            sessionUser.setUser_pw(changePassword);
+            userService.getUserUpdatePw(sessionUser);
+
+            /* 비밀번호 변경후 로그아웃 */
+            session.invalidate();
+        }
+
+        return data;
+    }
+
+    //  회원탈퇴
+    @PostMapping(value = "deleteUserInfoByUserNo")
+    public HashMap<String, Object> deleteUserInfoByUserNo(UserVo vo, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+
+        HashMap<String, Object> data = new HashMap<String, Object>();
+
+        UserVo sessionUser = (UserVo) session.getAttribute("sessionUser");
+        String password = vo.getUser_pw();
+
+        if (!BCrypt.checkpw(vo.getUser_pw(), sessionUser.getUser_pw())) {
+            data.put("result", "fail");
+        } else {
+            data.put("result", "success");
+            userService.deleteUserInfoByUserNo(sessionUser);
+            session.invalidate();
         }
         return data;
     }

@@ -54,4 +54,13 @@ public interface UserDAO {
 
     // 임시비밀번호 발급
     public void getUserUpdatePw(UserVo param);
+
+    //  회원정보 조회
+    public UserVo getUser(String user_id);
+
+    //  회원정보 수정
+    public void updateUserInfo(UserVo param);
+
+    //  회원정보 탈퇴
+    public void deleteUserInfoByUserNo(UserVo param);
 }

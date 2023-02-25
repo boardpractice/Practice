@@ -105,4 +105,23 @@ public class UserDAOImpl implements UserDAO {
     public void getUserUpdatePw(UserVo param) {
         sqlSession.update(NAMESPACE + ".getUserUpdatePw", param);
     }
+
+    //  회원정보 조회
+    public UserVo getUser(String user_id) {
+        return sqlSession.selectOne(NAMESPACE + ".getUser", user_id);
+    }
+
+    //  회원정보 수정
+    @Override
+    @LogException
+    public void updateUserInfo(UserVo param) {
+        sqlSession.update(NAMESPACE + ".updateUserInfo", param);
+    }
+
+    //  회원정보 탈퇴
+    @Override
+    @LogException
+    public void deleteUserInfoByUserNo(UserVo param) {
+        sqlSession.update(NAMESPACE + ".deleteUserInfoByUserNo", param);
+    }
 }

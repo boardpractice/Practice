@@ -4,9 +4,11 @@
 <mapper namespace="mappers.user.UserSQLMapper">
     <!-- 회원가입 -->
     <insert id="insertUser">
-        insert into eden_user(user_no, user_id, user_pw, user_nickname, user_image, user_gender, user_birth, user_phone,
-                              user_email, user_status, user_join_date, user_last_connection_date)
+        insert into eden_user(user_no, question_no, user_id, user_pw, user_nickname, user_image, user_gender,
+                              user_birth, user_phone, user_email, user_findAnswer, user_status, user_join_date,
+                              user_last_connection_date)
         values (eden_user_seq.nextval,
+                #{question_no},
                 #{user_id},
                 #{user_pw},
                 #{user_nickname},
@@ -15,6 +17,7 @@
                 #{user_birth},
                 #{user_phone},
                 #{user_email},
+                #{user_findAnswer},
                 'active',
                 sysdate,
                 sysdate)
@@ -65,7 +68,8 @@
 
     <!-- 비밀번호 찾기 질문 -->
     <select id="getJoinQuestionList" resultType="QuestionVo">
-        select * from eden_find_question
+        select *
+        from eden_find_question
     </select>
 
     <!-- 비밀번호 찾기 질문 조회 -->
@@ -90,5 +94,31 @@
         UPDATE eden_user
         SET user_pw = #{user_pw}
         WHERE user_id = #{user_id}
+    </update>
+
+    <!-- 회원정보 조회 -->
+    <select id="getUser" resultType="UserVo">
+        select *
+        from eden_user
+        WHERE user_id = #{user_id}
+    </select>
+
+    <!-- 회원정보 수정 -->
+    <update id="updateUserInfo">
+        update eden_user
+        SET question_no     = #{question_no},
+            user_nickname   = #{user_nickname},
+            user_phone      = #{user_phone},
+            user_email      = #{user_email},
+            user_findAnswer = #{user_findAnswer}
+        where user_id = #{user_id}
+    </update>
+
+    <!-- 회원정보 탈퇴 -->
+    <update id="deleteUserInfoByUserNo">
+        UPDATE eden_user
+        SET user_status = 'Inactive'
+        WHERE user_no = #{user_no}
+          AND user_pw = #{user_pw}
     </update>
 </mapper>

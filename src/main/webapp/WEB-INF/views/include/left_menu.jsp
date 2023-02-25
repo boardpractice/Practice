@@ -34,7 +34,7 @@ Purpose : left menu bar include jsp file
 
                 <c:otherwise>
                     <div class="pull-left image">
-                        <img src="/dist/img/profile/${sessionUser.user_image}" class="img-circle" alt="User Image">
+                        <img src="/resources/dist/img/profile/${sessionUser.user_image}" class="img-circle" alt="User Image">
                     </div>
 
                     <div class="pull-left info">
