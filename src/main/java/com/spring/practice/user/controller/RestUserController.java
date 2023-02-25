@@ -196,6 +196,9 @@ public class RestUserController {
                         response.addCookie(userInputId);
                     }
                 }
+                String url = (String) session.getAttribute("destination");
+                String redirect = url != null ? url : "/";
+                data.put("redirect", redirect);
             }
         }
         return data;

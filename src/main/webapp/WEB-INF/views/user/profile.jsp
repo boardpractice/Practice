@@ -36,7 +36,7 @@ Purpose : User Profile Web View Page
 
                             <h3 class="profile-username text-center">${sessionUser.user_nickname}</h3>
                             <div class="text-center">
-                                <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+                                <a class="btn btn-primary btn-xs" data-toggle="modal"
                                    data-target="#userPhotoModal">
                                     <i class="fa fa-photo"> 프로필사진 수정</i>
                                 </a>
@@ -71,13 +71,13 @@ Purpose : User Profile Web View Page
                             </ul>
                         </div>
                         <div class="box-footer text-center">
-                            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#userInfoModal">
+                            <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#userInfoModal">
                                 <i class="fa fa-info-circle"> 회원정보 수정</i>
                             </a>
-                            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#userPwModal">
+                            <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#userPwModal">
                                 <i class="fa fa-question-circle"> 비밀번호 수정</i>
                             </a>
-                            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#userOutModal">
+                            <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#userOutModal">
                                 <i class="fa fa-user-times"> 회원 탈퇴</i>
                             </a>
                         </div>

@@ -400,13 +400,13 @@ window.addEventListener("DOMContentLoaded", function () {
             success: function (data) {
                 if (data.result == "success") {
                     alert("로그인에 성공 하였습니다.");
-                    location.href = "/";
+                    location.href = data.redirect;
                 } else if (data.result == "out") {
                     if (confirm("비활성화된 계정입니다. 계정 활성화 페이지로 이동하시겠습니까?") == true) {
                         location.href = "../user/userLogoutProcess";
                         location.href = "../user/userRecoveryPage";
                     } else {
-                        location.href = "../main/main";
+                        location.href = "/";
                     }
                 } else {
                     alert("로그인에 실패하였습니다. 아이디와 비밀번호를 확인해 주세요.");

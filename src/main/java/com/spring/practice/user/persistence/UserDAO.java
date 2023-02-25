@@ -63,4 +63,7 @@ public interface UserDAO {
 
     //  회원정보 탈퇴
     public void deleteUserInfoByUserNo(UserVo param);
+
+    // 로그인 일자 갱신
+    public void updateLoginDate(String user_id);
 }

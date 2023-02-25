@@ -59,6 +59,15 @@ Purpose : plugin java script include  jsp file
 <!-- ./wrapper -->
 
 <%@ include file="include/plugin_js.jsp" %>
+<script type="text/javascript">
+    let url = location.pathname;
+    $(document).ready(function () {
+        if (url.includes('login')) {
+            alert("현재 페이지는 로그인을 해야만 로그인 하실 수 있습니다.");
+            showLoginModal();
+        }
+    });
+</script>
 
 </body>
 </html>

@@ -43,4 +43,14 @@
         <beans:property name="cacheSeconds" value="60"/>
     </beans:bean>
 
+    <!-- 로그인 권한 인증 요청 인터셉터 -->
+    <beans:bean id="authentication" class="com.spring.practice.commons.interceptor.AuthenticationInterceptor" />
+
+    <interceptors>
+        <interceptor>
+            <mapping path="/user/profile"/>
+            <beans:ref bean="authentication" />
+        </interceptor>
+    </interceptors>
+
 </beans:beans>

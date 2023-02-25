@@ -21,7 +21,7 @@ Purpose : top menu bar include jsp file
     </a>
 
     <nav class="navbar navbar-static-top" role="navigation">
-        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <a class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
         <div class="navbar-custom-menu">
@@ -29,7 +29,7 @@ Purpose : top menu bar include jsp file
                 <c:choose>
                     <c:when test="${!empty sessionUser }">
                         <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../resources/dist/img/profile/${sessionUser.user_image}" class="user-image"
                                      alt="User Image">
                                 <span class="hidden-xs">${sessionUser.user_nickname}</span>
@@ -97,7 +97,7 @@ Purpose : top menu bar include jsp file
                                                 class="fa fa-user-plus"></i><b> 회원가입</b></a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-primary btn-flat" onclick="showLoginModal();"><i
+                                        <a class="btn btn-primary btn-flat" onclick="showLoginModal();"><i
                                                 class="glyphicon glyphicon-log-in"></i><b> 로그인</b></a>
                                     </div>
                                 </li>

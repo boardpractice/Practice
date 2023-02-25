@@ -39,7 +39,10 @@ Purpose : Custom Exception Message View Page
         <section class="content container-fluid">
 
             <div class="col-lg-12">
-                해당 페이지에서 예외가 발생 하였습니다 관리자에게 문의 부탁드립니다.
+                <p>Exception : ${errorClass}</p>
+                <p>Method : ${errorMethod}</p>
+                <p>Message : ${errorMessage}</p>
+                <p>Cause: ${errorCause}</p>
             </div>
 
         </section>

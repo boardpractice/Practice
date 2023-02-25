@@ -124,4 +124,11 @@ public class UserDAOImpl implements UserDAO {
     public void deleteUserInfoByUserNo(UserVo param) {
         sqlSession.update(NAMESPACE + ".deleteUserInfoByUserNo", param);
     }
+
+    //  로그인 일자 업데이트
+    @Override
+    @LogException
+    public void updateLoginDate(String user_id) {
+        sqlSession.update(NAMESPACE + ".updateLoginDate", user_id);
+    }
 }

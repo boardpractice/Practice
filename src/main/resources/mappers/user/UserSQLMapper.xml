@@ -121,4 +121,9 @@
         WHERE user_no = #{user_no}
           AND user_pw = #{user_pw}
     </update>
+
+    <!-- 로그인 일자 업데이트 -->
+    <update id="updateLoginDate">
+        update eden_user set user_last_connection_date = SYSDATE where user_id = #{user_id}
+    </update>
 </mapper>

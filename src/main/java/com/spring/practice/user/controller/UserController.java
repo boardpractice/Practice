@@ -55,7 +55,7 @@ public class UserController {
         }
 
         userService.insertUser(param);
-        return "redirect:../main/main";
+        return "redirect:../";
     }
 
     // 내정보 페이지
