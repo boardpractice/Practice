@@ -126,4 +126,37 @@
     <update id="updateLoginDate">
         update eden_user set user_last_connection_date = SYSDATE where user_id = #{user_id}
     </update>
+
+    <!-- 아이디 체크 -->
+    <select id="isCheckId" resultType="int">
+        select count(*) from eden_user where user_id = #{user_id}
+    </select>
+
+    <!-- 닉네임 체크 -->
+    <select id="isCheckNickName" resultType="int">
+        select count(*) from eden_user where user_id = #{user_id} and user_nickname = #{user_nickname}
+    </select>
+
+    <!-- 이메일 체크 -->
+    <select id="isCheckEmail" resultType="int">
+        select count(*) from eden_user where user_id = #{user_id} and user_email = #{user_email}
+    </select>
+
+    <!-- 계정 복구 데이터 조회 -->
+    <select id="checkUser" resultType="int">
+        select *
+        from eden_user
+        where user_id = #{user_id}
+          and user_nickname = #{user_nickname}
+          and user_email = #{user_email}
+    </select>
+
+    <!-- 계정 활성화 -->
+    <update id="recoveryUserByInfo">
+        update eden_user
+        SET user_status = 'active'
+        where user_id = #{user_id}
+          and user_nickname = #{user_nickname}
+          and user_email = #{user_email}
+    </update>
 </mapper>

@@ -131,4 +131,29 @@ public class UserDAOImpl implements UserDAO {
     public void updateLoginDate(String user_id) {
         sqlSession.update(NAMESPACE + ".updateLoginDate", user_id);
     }
+
+    //  아이디 체크
+    public int isCheckId(String user_id) {
+        return sqlSession.selectOne(NAMESPACE + ".isCheckId", user_id);
+    }
+
+    //  닉네임 체크
+    public int isCheckNickName(UserVo param) {
+        return sqlSession.selectOne(NAMESPACE + ".isCheckNickName", param);
+    }
+
+    //  이메일 체크
+    public int isCheckEmail(UserVo param) {
+        return sqlSession.selectOne(NAMESPACE + ".isCheckEmail", param);
+    }
+
+    //  계정 복구 정보 조회
+    public int checkUser(UserVo param) {
+        return sqlSession.selectOne(NAMESPACE + ".checkUser", param);
+    }
+
+    //  계정 활성화
+    public void recoveryUserByInfo(UserVo param) {
+        sqlSession.update(NAMESPACE + ".recoveryUserByInfo", param);
+    }
 }

@@ -122,4 +122,39 @@ public class UserServiceImpl implements UserService {
     public void deleteUserInfoByUserNo(UserVo param) {
         userDAO.deleteUserInfoByUserNo(param);
     }
+
+    //  아이디 체크
+    @Override
+    @LogException
+    public boolean isCheckId(String user_id) {
+        return userDAO.isCheckId(user_id) > 0;
+    }
+
+    //  닉네임 체크
+    @Override
+    @LogException
+    public boolean isCheckNickName(UserVo param) {
+        return userDAO.isCheckNickName(param) > 0;
+    }
+
+    //  이메일 체크
+    @Override
+    @LogException
+    public boolean isCheckEmail(UserVo param) {
+        return userDAO.isCheckEmail(param) > 0;
+    }
+
+    //  계정 복구 정보 조회
+    @Override
+    @LogException
+    public int checkUser(UserVo param) {
+        return userDAO.checkUser(param);
+    }
+
+    //  계정 활성화
+    @Override
+    @LogException
+    public void recoveryUserByInfo(UserVo param) {
+        userDAO.recoveryUserByInfo(param);
+    }
 }

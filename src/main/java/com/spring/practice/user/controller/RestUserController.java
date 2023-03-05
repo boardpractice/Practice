@@ -364,4 +364,97 @@ public class RestUserController {
         }
         return data;
     }
+
+
+
+    //  아이디 체크
+    @PostMapping(value = "checkId")
+    @LogException
+    public HashMap<String, Object> checkId(String user_id) {
+        HashMap<String, Object> data = new HashMap<String, Object>();
+
+        boolean isCheckId = userService.isCheckId(user_id);
+
+        if (isCheckId) {
+            data.put("result", "success");
+        } else {
+            data.put("result", "fail");
+        }
+        return data;
+    }
+
+    //  닉네임 체크
+    @PostMapping("checkNickName")
+    @LogException
+    public HashMap<String, Object> checkNickName(UserVo param) {
+
+        HashMap<String, Object> data = new HashMap<String, Object>();
+
+        boolean isCheckNick = userService.isCheckNickName(param);
+
+        if (isCheckNick) {
+            data.put("result", "success");
+        } else {
+            data.put("result", "fail");
+        }
+        return data;
+    }
+
+    //  이메일 체크
+    @PostMapping(value = "emailCheck")
+    @LogException
+    public HashMap<String, Object> emailCheck(UserVo param) {
+
+        HashMap<String, Object> data = new HashMap<String, Object>();
+
+        boolean isCheckNick = userService.isCheckEmail(param);
+
+        if (isCheckNick) {
+            data.put("result", "success");
+            Random random = new Random();
+            int checkNum = random.nextInt(888888) + 111111;
+
+            try {
+                MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+                MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+
+                messageHelper.setFrom("hanbyeols333z@gmail.com", "관리자"); // 보내는사람 이메일 여기선 google 메일서버 사용하는 아이디를 작성하면됨
+                messageHelper.setTo(param.getUser_email()); // 받는사람 이메일
+                messageHelper.setSubject("계정 복구 인증 메일입니다.."); // 메일제목
+                messageHelper.setText("홈페이지를 방문해주셔서 감사합니다." +
+                        "인증 번호는 " + checkNum + " 입니다." +
+                        "\r\n" +
+                        "해당 인증번호를 인증번호 확인란에 기입하여 주세요."); // 메일 내용
+
+                javaMailSender.send(mimeMessage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            data.put("code", checkNum);
+        } else {
+            data.put("result", "fail");
+        }
+        return data;
+    }
+
+    //  계정복구
+    @PostMapping(value = "recoveryUserByInfo")
+    @LogException
+    public HashMap<String, Object> recoveryUserByInfo (UserVo vo){
+
+        HashMap<String, Object> data = new HashMap<String, Object>();
+
+
+        int checkUser = userService.checkUser(vo);
+
+        if ( checkUser == 1 ) {
+            userService.recoveryUserByInfo(vo);
+            data.put("result", "success");
+        } else {
+            data.put("result", "fail");
+        }
+
+        return data;
+    }
 }

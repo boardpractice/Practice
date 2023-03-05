@@ -66,4 +66,19 @@ public interface UserDAO {
 
     // 로그인 일자 갱신
     public void updateLoginDate(String user_id);
+
+    //  아이디 체크
+    public int isCheckId(String user_id);
+
+    //  닉네임 체크
+    public int isCheckNickName(UserVo param);
+
+    //  이메일 체크
+    public int isCheckEmail(UserVo param);
+
+    //  계정 복구 정보 조회
+    public int checkUser(UserVo param);
+
+    //  계정 활성화
+    public void recoveryUserByInfo(UserVo param);
 }

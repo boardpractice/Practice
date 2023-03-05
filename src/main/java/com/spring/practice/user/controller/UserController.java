@@ -67,4 +67,10 @@ public class UserController {
 
         return "user/profile";
     }
+
+    //  계정복구 페이지
+    @GetMapping(value = "userRecoveryPage")
+    public String userRecoveryPage() {
+        return "user/userRecoveryPage";
+    }
 }
