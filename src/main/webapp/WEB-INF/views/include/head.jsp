@@ -21,6 +21,7 @@ Purpose :  head tag include jsp file
 
 <%--head.jsp--%>
 <head>
+    <link type="image/png" sizes="96x96" rel="icon" href="/resources/dist/img/favicon.png">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SpringMVC Examples</title>
