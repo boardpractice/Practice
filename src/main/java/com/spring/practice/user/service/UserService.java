@@ -17,6 +17,7 @@ import com.spring.practice.user.domain.LoginDTO;
 import com.spring.practice.user.domain.QuestionVo;
 import com.spring.practice.user.domain.UserVo;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -78,4 +79,10 @@ public interface UserService {
 
     //  계정 활성화
     public void recoveryUserByInfo(UserVo param);
+
+    // 로그인유지
+    public void keepLogin(String uid, String sessionId, Date next);
+
+    // Session Key 확인
+    public UserVo checkLoginBefore(String value);
 }

@@ -1,14 +1,14 @@
 <%--
-  ~ ┌───────────────────────────────────────────────────────────────────┐
-  ~ │ Copyright (c) 2023년 3월 5일 EdenDEV All rights reserved.         │
-  ~ └───────────────────────────────────────────────────────────────────┘
-  --%>
+┌───────────────────────────────────────────────────────────────────┐
+│ Copyright (c) 2023년 3월 5일 EdenDEV All rights reserved.          │
+└───────────────────────────────────────────────────────────────────┘
+--%>
 
 <%--
 Date Created : 2023-03-05
 Code Author : EdenDev
 Creation Time : 오전 10:40
-Purpose : 
+Purpose : User Recovery Web View Page
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

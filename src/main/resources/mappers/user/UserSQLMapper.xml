@@ -4,23 +4,19 @@
 <mapper namespace="mappers.user.UserSQLMapper">
     <!-- 회원가입 -->
     <insert id="insertUser">
-        insert into eden_user(user_no, question_no, user_id, user_pw, user_nickname, user_image, user_gender,
-                              user_birth, user_phone, user_email, user_findAnswer, user_status, user_join_date,
-                              user_last_connection_date)
+        insert into eden_user(user_no, question_no, user_id, user_pw, user_nickname, user_gender,
+                              user_birth, user_phone, user_email, user_findAnswer)
         values (eden_user_seq.nextval,
                 #{question_no},
                 #{user_id},
                 #{user_pw},
                 #{user_nickname},
-                'default-user-image.jpg',
                 #{user_gender},
                 #{user_birth},
                 #{user_phone},
                 #{user_email},
-                #{user_findAnswer},
-                'active',
-                sysdate,
-                sysdate)
+                #{user_findAnswer}
+                )
     </insert>
 
     <!-- 아이디 중복체크 -->
@@ -159,4 +155,21 @@
           and user_nickname = #{user_nickname}
           and user_email = #{user_email}
     </update>
+
+    <!--로그인 유지-->
+    <update id="keepLogin">
+        UPDATE eden_user
+        SET
+            sessionkey     = #{sessionId}
+          , sessionlimit = #{next}
+        WHERE user_id = #{user_id}
+    </update>
+
+    <!--Session Key 확인-->
+    <select id="checkUserWithSessionKey" resultType="UserVo">
+        SELECT *
+        FROM eden_user
+        WHERE sessionkey = #{value}
+          AND sessionlimit > sysdate
+    </select>
 </mapper>

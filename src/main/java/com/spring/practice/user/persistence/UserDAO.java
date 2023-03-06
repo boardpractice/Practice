@@ -17,6 +17,7 @@ import com.spring.practice.user.domain.LoginDTO;
 import com.spring.practice.user.domain.QuestionVo;
 import com.spring.practice.user.domain.UserVo;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -81,4 +82,10 @@ public interface UserDAO {
 
     //  계정 활성화
     public void recoveryUserByInfo(UserVo param);
+
+    //  자동 로그인
+    public void keepLogin(String user_id, String sessionId, Date next);
+
+    // Session Key 확인
+    public UserVo checkUserWithSessionKey(String value);
 }

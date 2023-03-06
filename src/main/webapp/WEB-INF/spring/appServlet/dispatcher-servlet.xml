@@ -44,12 +44,20 @@
     </beans:bean>
 
     <!-- 로그인 권한 인증 요청 인터셉터 -->
-    <beans:bean id="authentication" class="com.spring.practice.commons.interceptor.AuthenticationInterceptor" />
+    <beans:bean id="authentication" class="com.spring.practice.commons.interceptor.AuthenticationInterceptor"/>
+
+    <!-- 자동로그인 요청 인터셉터 -->
+    <beans:bean id="autoLoginInterceptor" class="com.spring.practice.commons.interceptor.AutoLoginInterceptor"/>
 
     <interceptors>
         <interceptor>
             <mapping path="/user/profile"/>
-            <beans:ref bean="authentication" />
+            <beans:ref bean="authentication"/>
+        </interceptor>
+
+        <interceptor>
+            <mapping path="/**/"/>
+            <beans:ref bean="autoLoginInterceptor"/>
         </interceptor>
     </interceptors>
 

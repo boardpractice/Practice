@@ -21,8 +21,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -133,27 +135,56 @@ public class UserDAOImpl implements UserDAO {
     }
 
     //  아이디 체크
+    @Override
+    @LogException
     public int isCheckId(String user_id) {
         return sqlSession.selectOne(NAMESPACE + ".isCheckId", user_id);
     }
 
     //  닉네임 체크
+    @Override
+    @LogException
     public int isCheckNickName(UserVo param) {
         return sqlSession.selectOne(NAMESPACE + ".isCheckNickName", param);
     }
 
     //  이메일 체크
+    @Override
+    @LogException
     public int isCheckEmail(UserVo param) {
         return sqlSession.selectOne(NAMESPACE + ".isCheckEmail", param);
     }
 
     //  계정 복구 정보 조회
+    @Override
+    @LogException
     public int checkUser(UserVo param) {
         return sqlSession.selectOne(NAMESPACE + ".checkUser", param);
     }
 
     //  계정 활성화
+    @Override
+    @LogException
     public void recoveryUserByInfo(UserVo param) {
         sqlSession.update(NAMESPACE + ".recoveryUserByInfo", param);
+    }
+
+    // 로그인 유지
+    @Override
+    @LogException
+    public void keepLogin(String user_id, String sessionId, Date next) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("user_id", user_id);
+        paramMap.put("sessionId", sessionId);
+        paramMap.put("next", next);
+
+        sqlSession.update(NAMESPACE + ".keepLogin", paramMap);
+    }
+
+    // Session Key 확인
+    @Override
+    @LogException
+    public UserVo checkUserWithSessionKey(String value) {
+        return sqlSession.selectOne(NAMESPACE + ".checkUserWithSessionKey", value);
     }
 }

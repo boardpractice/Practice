@@ -21,6 +21,7 @@ import com.spring.practice.user.persistence.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -156,5 +157,19 @@ public class UserServiceImpl implements UserService {
     @LogException
     public void recoveryUserByInfo(UserVo param) {
         userDAO.recoveryUserByInfo(param);
+    }
+
+    //  자동로그인
+    @Override
+    @LogException
+    public void keepLogin(String user_id, String sessionId, Date next) {
+        userDAO.keepLogin(user_id, sessionId, next);
+    }
+
+    // Session Key 확인
+    @Override
+    @LogException
+    public UserVo checkLoginBefore(String value) {
+        return userDAO.checkUserWithSessionKey(value);
     }
 }

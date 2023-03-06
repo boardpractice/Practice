@@ -13,15 +13,17 @@ create table eden_user
     user_id                   varchar2(15)  not null unique,
     user_pw                   varchar2(200) not null,
     user_nickname             varchar2(30)  not null unique,
-    user_image                varchar2(200) not null,
+    user_image                varchar2(200) default 'default-user-image.jpg',
     user_gender               varchar2(1)   not null,
     user_birth                date          not null,
     user_phone                varchar2(30)  not null unique,
     user_email                varchar2(200) not null unique,
     user_findAnswer           varchar2(200) not null,
-    user_status               varchar2(200) not null,
-    user_join_date            date          not null,
-    user_last_connection_date date          not null,
+    user_status               varchar2(200) default 'active',
+    user_join_date            date          default sysdate,
+    user_last_connection_date date          default sysdate,
+    sessionkey                varchar2(50)  default 'none',
+    sessionlimit              date          default sysdate,
     constraint user_find_question_no foreign key (question_no) references eden_find_question (question_no)
 );
 
@@ -30,14 +32,18 @@ drop sequence eden_user_seq;
 create sequence eden_user_seq;
 
 -- 회원 테이블 (비밀번호 질문, 답변 추가, foreign key 추가 )
-alter table eden_user add question_no number;
-alter table eden_user add user_findAnswer varchar2(200);
-alter table eden_user add constraint user_find_question_no foreign key (question_no) references eden_find_question (question_no);
+alter table eden_user
+    add question_no number;
+alter table eden_user
+    add user_findAnswer varchar2(200);
+alter table eden_user
+    add constraint user_find_question_no foreign key (question_no) references eden_find_question (question_no);
 
 --  회원 비밀번호 찾기 질문 테이블
 drop table eden_find_question;
-create table eden_find_question(
-    question_no number primary key,
+create table eden_find_question
+(
+    question_no      number primary key,
     question_content varchar2(200) not null
 );
 
@@ -61,4 +67,10 @@ VALUES (eden_find_question_seq.nextval, '가장 좋아하는 색깔은 무엇 �
 INSERT INTO eden_find_question(question_no, question_content)
 VALUES (eden_find_question_seq.nextval, '가장 좋아하는 음식은 무엇 입니까?');
 
-update eden_user set user_status = 'active' where user_no = 24;
+-- 자동 로그인 (세션아이디 / 세션리미트)
+alter table eden_user
+    add sessionkey varchar2(50) default 'none';
+alter table eden_user
+    add sessionlimit date default sysdate;
+
+commit;
