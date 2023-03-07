@@ -88,4 +88,7 @@ public interface UserDAO {
 
     // Session Key 확인
     public UserVo checkUserWithSessionKey(String value);
+
+    //  게시글 작성자 정보
+    public UserVo getUserByNo(int user_no);
 }

@@ -158,18 +158,23 @@
 
     <!--로그인 유지-->
     <update id="keepLogin">
-        UPDATE eden_user
-        SET
+        update eden_user
+        set
             sessionkey     = #{sessionId}
           , sessionlimit = #{next}
-        WHERE user_id = #{user_id}
+        where user_id = #{user_id}
     </update>
 
     <!--Session Key 확인-->
     <select id="checkUserWithSessionKey" resultType="UserVo">
-        SELECT *
-        FROM eden_user
-        WHERE sessionkey = #{value}
-          AND sessionlimit > sysdate
+        select *
+        from eden_user
+        where sessionkey = #{value}
+          and sessionlimit > sysdate
+    </select>
+
+    <!-- 게시글 작성자 정보 -->
+    <select id="getUserByNo" resultType="UserVo">
+        select * from eden_user where user_no = #{user_no}
     </select>
 </mapper>

@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.board.BoardSQLMapper">
+
+    <!-- 게시글 목록 -->
+    <select id="getBoardList" resultType="BoardVo">
+        select * from eden_board
+    </select>
+
+    <!-- 게시글 목록 (카테고리별 정렬) -->
+    <select id="getBoardByCategoryList" resultType="BoardVo">
+        select * from eden_board where category_no = #{category_no}
+    </select>
+
+    <!-- 카테고리 정보 -->
+    <select id="getCategoryByNo" resultType="CategoryVo">
+        select * from eden_board_category where category_no = #{category_no}
+    </select>
+</mapper>

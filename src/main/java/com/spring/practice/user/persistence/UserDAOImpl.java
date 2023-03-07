@@ -187,4 +187,9 @@ public class UserDAOImpl implements UserDAO {
     public UserVo checkUserWithSessionKey(String value) {
         return sqlSession.selectOne(NAMESPACE + ".checkUserWithSessionKey", value);
     }
+
+    //  게시글 작성자 정보 확인
+    public UserVo getUserByNo(int user_no) {
+        return sqlSession.selectOne(NAMESPACE + ".getUserByNo", user_no);
+    }
 }

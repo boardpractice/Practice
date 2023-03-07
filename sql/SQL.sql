@@ -74,3 +74,44 @@ alter table eden_user
     add sessionlimit date default sysdate;
 
 commit;
+
+-- 게시판 테이블
+drop table eden_board;
+create table eden_board
+(
+    board_no         number primary key,
+    user_no          number,
+    category_no      number,
+    board_title      varchar2(2000) not null,
+    board_content    varchar2(4000) not null,
+    board_view_count number default 0,
+    board_write_date date   default sysdate,
+    constraint board_user_no foreign key (user_no) references eden_user (user_no),
+    constraint board_category_no foreign key (category_no) references eden_board_category (category_no)
+);
+
+-- 게시판 시퀸스
+drop sequence eden_board_seq;
+create sequence eden_board_seq;
+
+--  게시판 카테고리
+drop table eden_board_category;
+create table eden_board_category
+(
+    category_no   number primary key,
+    category_name varchar2(200) not null
+);
+
+--  게시판 카테고리 시퀸스
+drop sequence eden_board_category_seq;
+create sequence eden_board_category_seq;
+
+--  게시판 카테고리 생성
+insert into eden_board_category (category_no, category_name) values (eden_board_category_seq.nextval, '자유게시판');
+insert into eden_board_category (category_no, category_name) values (eden_board_category_seq.nextval, '사진게시판');
+insert into eden_board_category (category_no, category_name) values (eden_board_category_seq.nextval, '동영상게시판');
+
+--  게시글 목록 출력 테스트
+insert into eden_board (board_no, user_no, category_no, board_title, board_content) values (eden_board_seq.nextval, 1, 1, '게시글 목록 출력 테스트', '테스트입니다.');
+insert into eden_board (board_no, user_no, category_no, board_title, board_content) values (eden_board_seq.nextval, 1, 2, '게시글 목록 출력 테스트', '테스트입니다.');
+insert into eden_board (board_no, user_no, category_no, board_title, board_content) values (eden_board_seq.nextval, 1, 3, '게시글 목록 출력 테스트', '테스트입니다.');

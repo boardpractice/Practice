@@ -7,6 +7,8 @@
     <typeAliases>
         <typeAlias type="com.spring.practice.user.domain.UserVo" alias="UserVo" />
         <typeAlias type="com.spring.practice.user.domain.QuestionVo" alias="QuestionVo" />
+        <typeAlias type="com.spring.practice.board.domain.BoardVo" alias="BoardVo" />
+        <typeAlias type="com.spring.practice.board.domain.CategoryVo" alias="CategoryVo" />
     </typeAliases>
 
 </configuration>
