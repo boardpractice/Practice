@@ -39,4 +39,46 @@
     <select id="getBoardByNo" resultType="BoardVo">
         select * from eden_board where board_no = #{board_no}
     </select>
+
+    <!-- 게시글 조회수 중복 증가 방지 -->
+    <insert id="insertViewPage">
+        insert into eden_view_page (view_page_no, board_no, lockup_ip)
+        values (eden_view_page_seq.nextval,
+                #{board_no},
+                #{lockup_ip})
+    </insert>
+
+    <!-- 게시글 조회수 중복 증가 방지 조회 -->
+    <select id="getViewPageList" resultType="ViewPageVo">
+        select * from eden_view_page where board_no = #{boardNo}
+    </select>
+
+    <!-- 게시글 조회한 아이피 -->
+    <select id="selectByLockupIp" resultType="int">
+        select count(*) from eden_view_page where lockup_ip = #{lockup_ip}
+    </select>
+
+    <!-- 게시글 조회수 중복 증가 (게시글 조회) -->
+    <select id="selectByViewByBoardNo" resultType="int">
+        select count(*) from eden_view_page where board_no = #{boardNo}
+    </select>
+
+    <!-- 게시글 조회수 중복 증가 (게시글, 아이피 조회) -->
+    <select id="selectByViewPage" resultType="int">
+        select count(*) from eden_view_page where lockup_ip = #{lockup_ip} and board_no =#{board_no}
+    </select>
+
+    <!-- 게시글 조회수 증가 -->
+    <update id="increaseReadCount">
+        update eden_board set board_view_count = board_view_count + 1 where board_no = #{boardNo}
+    </update>
+
+    <update id="updateViewPage">
+        update eden_view_page set view_inquiry_time = sysdate where lockup_ip = #{lockup_ip} and board_no = #{board_no}
+    </update>
+
+    <!-- 게시글 조회수 중복 증가 방지 삭제 -->
+    <delete id="deleteViewPage">
+        delete from eden_view_page where board_no = #{boardNo}
+    </delete>
 </mapper>

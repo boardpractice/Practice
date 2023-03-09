@@ -9,6 +9,7 @@
         <typeAlias type="com.spring.practice.user.domain.QuestionVo" alias="QuestionVo" />
         <typeAlias type="com.spring.practice.board.domain.BoardVo" alias="BoardVo" />
         <typeAlias type="com.spring.practice.board.domain.CategoryVo" alias="CategoryVo" />
+        <typeAlias type="com.spring.practice.board.domain.ViewPageVo" alias="ViewPageVo" />
     </typeAliases>
 
 </configuration>

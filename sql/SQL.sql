@@ -107,11 +107,32 @@ drop sequence eden_board_category_seq;
 create sequence eden_board_category_seq;
 
 --  게시판 카테고리 생성
-insert into eden_board_category (category_no, category_name) values (eden_board_category_seq.nextval, '자유게시판');
-insert into eden_board_category (category_no, category_name) values (eden_board_category_seq.nextval, '사진게시판');
-insert into eden_board_category (category_no, category_name) values (eden_board_category_seq.nextval, '동영상게시판');
+insert into eden_board_category (category_no, category_name)
+values (eden_board_category_seq.nextval, '자유게시판');
+insert into eden_board_category (category_no, category_name)
+values (eden_board_category_seq.nextval, '사진게시판');
+insert into eden_board_category (category_no, category_name)
+values (eden_board_category_seq.nextval, '동영상게시판');
 
 --  게시글 목록 출력 테스트
-insert into eden_board (board_no, user_no, category_no, board_title, board_content) values (eden_board_seq.nextval, 1, 1, '게시글 목록 출력 테스트', '테스트입니다.');
-insert into eden_board (board_no, user_no, category_no, board_title, board_content) values (eden_board_seq.nextval, 1, 2, '게시글 목록 출력 테스트', '테스트입니다.');
-insert into eden_board (board_no, user_no, category_no, board_title, board_content) values (eden_board_seq.nextval, 1, 3, '게시글 목록 출력 테스트', '테스트입니다.');
+insert into eden_board (board_no, user_no, category_no, board_title, board_content)
+values (eden_board_seq.nextval, 1, 1, '게시글 목록 출력 테스트', '테스트입니다.');
+insert into eden_board (board_no, user_no, category_no, board_title, board_content)
+values (eden_board_seq.nextval, 1, 2, '게시글 목록 출력 테스트', '테스트입니다.');
+insert into eden_board (board_no, user_no, category_no, board_title, board_content)
+values (eden_board_seq.nextval, 1, 3, '게시글 목록 출력 테스트', '테스트입니다.');
+
+--  게시글 조회수 테이블
+drop table eden_view_page;
+create table eden_view_page
+(
+    view_page_no      number primary key,
+    board_no          number,
+    lockup_ip         varchar(200),
+    view_inquiry_time date default sysdate,
+    constraint eden_view_board_no foreign key(board_no) references eden_board (board_no)
+);
+
+--  게시판 조회수 시퀸스
+drop sequence eden_view_page_seq;
+create sequence eden_view_page_seq;
