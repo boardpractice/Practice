@@ -27,6 +27,11 @@ Purpose : Web Posting List View Page
 
     <div class="content-wrapper">
         <section class="content container-fluid">
+
+            <form name="writeForm" role="form" method="post">
+                <input type="hidden" id="category" name="category_no" value="">
+            </form>
+
             <div class="box-header with-border">
 
             </div>
@@ -61,7 +66,7 @@ Purpose : Web Posting List View Page
             </div>
             <div class="box-footer">
                 <div class="pull-right">
-                    <a class="btn btn-success btn-flat" href="javascript:writePage(${category_no});">
+                    <a class="btn btn-success btn-flat" href="javascript:writePosting(${category_no});">
                         <i class="fa fa-pencil"></i> 글쓰기
                     </a>
                 </div>

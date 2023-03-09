@@ -65,4 +65,18 @@ public class BoardServiceImpl implements BoardService{
         }
         return data;
     }
+
+    //  게시글 카테고리 목록
+    @Override
+    @LogException
+    public List<CategoryVo> getCategoryList() {
+        return boardDAO.getCategoryList();
+    }
+
+    //  게시글 작성
+    @Override
+    @LogException
+    public void insertPosting(BoardVo param) {
+        boardDAO.insertPosting(param);
+    }
 }

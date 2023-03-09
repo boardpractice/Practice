@@ -17,4 +17,21 @@
     <select id="getCategoryByNo" resultType="CategoryVo">
         select * from eden_board_category where category_no = #{category_no}
     </select>
+
+    <!-- 카테고리 목록 -->
+    <select id="getCategoryList" resultType="CategoryVo">
+        select * from eden_board_category
+    </select>
+
+    <!-- 게시글 작성 -->
+    <insert id="insertPosting">
+        insert into eden_board (board_no, user_no, category_no, board_title, board_content)
+        values (
+                eden_board_seq.nextval,
+                #{user_no},
+                #{category_no},
+                #{board_title},
+                #{board_content}
+               )
+    </insert>
 </mapper>

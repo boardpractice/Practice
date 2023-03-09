@@ -13,11 +13,21 @@
 
 package com.spring.practice.board.service;
 
+import com.spring.practice.board.domain.BoardVo;
+import com.spring.practice.board.domain.CategoryVo;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public interface BoardService {
 
     //  게시글 목록
     public ArrayList<HashMap<String, Object>> getBoardList(int category_no);
+
+    //  게시글 카테고리 목록
+    public List<CategoryVo> getCategoryList();
+
+    //  게시글 작성
+    public void insertPosting(BoardVo param);
 }

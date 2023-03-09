@@ -59,6 +59,10 @@ Purpose : left menu bar include jsp file
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    <li><a href="#" onclick="postingList(0)"> <i class="fa-thin fa-user-magnifying-glass"></i><span>전채글보기</span></a></li>
+                    <li><a href="#" onclick="postingList(1)"> <i class="fa-thin fa-user-magnifying-glass"></i><span>자유게시판</span></a></li>
+                    <li><a href="#" onclick="postingList(2)"> <i class="fa-thin fa-user-magnifying-glass"></i><span>사진게시판</span></a></li>
+                    <li><a href="#" onclick="postingList(3)"> <i class="fa-thin fa-user-magnifying-glass"></i><span>동영상게시판</span></a></li>
                 </ul>
             </li>
 
@@ -73,6 +77,10 @@ Purpose : left menu bar include jsp file
                 <ul class="treeview-menu">
                 </ul>
             </li>
+
+            <form id="list" role="form" method="post">
+                <input type="hidden" id="category_no" name="category_no" value="">
+            </form>
         </ul>
         <%-- /.sidebar-menu --%>
     </section>
