@@ -55,4 +55,15 @@ public class BoardController {
         model.addAttribute("list", boardService.getCategoryList());
         return "board/writePosting";
     }
+
+    //  게시글 상세보기
+    @PostMapping(value = "detailsPosting")
+    @LogException
+    public String detailsPosting(@RequestParam(value = "board_no", defaultValue = "0") int board_no, Model model) {
+
+        model.addAttribute("data", boardService.getBoard(board_no));
+
+        return "board/detailsPosting";
+
+    }
 }

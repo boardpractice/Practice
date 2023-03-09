@@ -64,4 +64,11 @@ public class BoardDAOImpl implements BoardDAO {
     public void insertPosting(BoardVo param) {
         sqlSession.insert(NAMESPACE + ".insertPosting", param);
     }
+
+    //  게시글 상세보기
+    @Override
+    @LogException
+    public BoardVo getBoardByNo(int board_no){
+        return sqlSession.selectOne(NAMESPACE + ".getBoardByNo", board_no);
+    }
 }

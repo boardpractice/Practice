@@ -28,6 +28,10 @@ Purpose : Web Posting List View Page
     <div class="content-wrapper">
         <section class="content container-fluid">
 
+            <form name="detailsForm" role="form" method="post">
+                <input type="hidden" id="boardNo" name="board_no" value="">
+            </form>
+
             <form name="writeForm" role="form" method="post">
                 <input type="hidden" id="category" name="category_no" value="">
             </form>

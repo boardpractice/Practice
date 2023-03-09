@@ -27,6 +27,14 @@ function writePosting(category_no) {
     form.submit();
 }
 
+function goPage(board_no) {
+    const form= $("form[name='detailsForm']");
+    $("#boardNo").attr("value", board_no);
+    form.attr("action", "../board/detailsPosting");
+    form.attr("method", "post");
+    form.submit();
+}
+
 window.addEventListener("DOMContentLoaded", function () {
 
     /* 게시글 작성 */
