@@ -128,4 +128,11 @@ public class BoardDAOImpl implements BoardDAO {
     public void deleteViewPage(int boardNo) {
         sqlSession.delete(NAMESPACE + ".deleteViewPage", boardNo);
     }
+
+    //  게시글 수정
+    @Override
+    @LogException
+    public void modifyBoard(BoardVo param) {
+        sqlSession.update(NAMESPACE + ".modifyBoard", param);
+    }
 }

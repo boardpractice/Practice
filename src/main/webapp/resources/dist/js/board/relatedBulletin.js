@@ -58,4 +58,54 @@ window.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
+    const formObj = $("form[role='form']");
+
+    $(".listBtn").click(function () {
+        formObj.attr("action", "../board/postingList");
+        formObj.attr("method", "post");
+        formObj.submit();
+    });
+
+    $(".modBtn").click(function () {
+        formObj.attr("action", "../board/modifyPosting");
+        formObj.attr("method", "post");
+        formObj.submit();
+    });
+
+    $(".crystalBtn").click(function () {
+        $.ajax({
+            type: "post",
+            url: "../board/modifyPostingProcess",
+            data: {
+                board_no: $("#updateBoardNo").val(),
+                category_no: $("#categoryList").val(),
+                board_title: $("#title").val(),
+                board_content: $("#content").val()
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.result == "error") {
+                    location.reload();
+                } else {
+                    alert("게시글 수정에 성공 하였습니다.");
+                    goPage($("#updateBoardNo").val());
+                }
+            }
+        })
+    });
+
+    $(".cancelBtn").click(function () {
+        formObj.attr("action", "../board/detailsPosting");
+        formObj.attr("method", "post");
+        formObj.submit();
+    });
+
+    $(".delBtn").click(function () {
+        if (confirm("해당 게시글을 정말로 삭제 하시겠습니까??")) {
+            formObj.attr("action", "../board/deletePosting");
+            formObj.attr("method", "post");
+            formObj.submit();
+        }
+    });
 })

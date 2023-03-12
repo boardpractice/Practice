@@ -150,4 +150,9 @@ public class BoardServiceImpl implements BoardService{
     public void deleteViewPage(int boardNo) {
         boardDAO.deleteViewPage(boardNo);
     }
+
+    //  게시글 수정
+    public void modifyBoard(BoardVo param) {
+        boardDAO.modifyBoard(param);
+    }
 }

@@ -61,4 +61,7 @@ public interface BoardDAO {
 
     //  게시글 조회수 중복 증가 삭제
     public void deleteViewPage(int boardNo);
+
+    //  게시글 수정
+    public void modifyBoard(BoardVo param);
 }

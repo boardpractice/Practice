@@ -81,4 +81,9 @@
     <delete id="deleteViewPage">
         delete from eden_view_page where board_no = #{boardNo}
     </delete>
+
+    <!-- 게시글 수정 -->
+    <update id="modifyBoard">
+        update eden_board set category_no = #{category_no}, board_title = #{board_title}, board_content = #{board_content} where board_no = #{board_no}
+    </update>
 </mapper>

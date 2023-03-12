@@ -99,4 +99,14 @@ public class BoardController {
         return "board/detailsPosting";
 
     }
+
+    //  게시글 수정 페이지
+    @PostMapping(value = "modifyPosting")
+    public String modifyPosting(@RequestParam(value = "board_no", defaultValue = "0") int boardNo, Model model, @ModelAttribute("boardVo") BoardVo boardVo) {
+
+        model.addAttribute("data", boardService.getBoard(boardNo));
+        model.addAttribute("list", boardService.getCategoryList());
+
+        return "board/modifyPosting";
+    }
 }

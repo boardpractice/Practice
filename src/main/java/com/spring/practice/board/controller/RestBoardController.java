@@ -53,4 +53,19 @@ public class RestBoardController {
 
         return data;
     }
+
+    //  게시글 수정 프로시져
+    @PostMapping(value = "modifyPostingProcess")
+    @LogException
+    public HashMap<String, Object> modifyPostingProcess(@Valid BoardVo param, BindingResult result) {
+
+        if (result.hasErrors()) {
+            data.put("result", "error");
+        }
+
+        boardService.modifyBoard(param);
+        data.put("result", "success");
+
+        return data;
+    }
 }

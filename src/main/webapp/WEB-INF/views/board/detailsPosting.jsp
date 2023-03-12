@@ -79,9 +79,9 @@ Purpose : Web Details Posting View Page
                         </button>
                         <c:if test="${sessionUser.user_no == data.boardVo.user_no}">
                             <div class="pull-right">
-                                <button type="submit" class="btn btn-warning modBtn"><i class="fa fa-edit"></i> 수정
+                                <button type="button" class="btn btn-warning modBtn"><i class="fa fa-edit"></i> 수정
                                 </button>
-                                <button type="submit" class="btn btn-danger delBtn"><i class="fa fa-trash"></i> 삭제
+                                <button type="button" class="btn btn-danger delBtn"><i class="fa fa-trash"></i> 삭제
                                 </button>
                             </div>
                         </c:if>
