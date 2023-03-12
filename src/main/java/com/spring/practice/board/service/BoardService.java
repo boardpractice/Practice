@@ -60,4 +60,7 @@ public interface BoardService {
 
     //  게시글 수정
     public void modifyBoard(BoardVo param);
+    
+    //  게시글 삭제
+    public void deletePosting(int boardNo);
 }

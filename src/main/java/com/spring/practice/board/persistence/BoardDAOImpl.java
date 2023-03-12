@@ -135,4 +135,11 @@ public class BoardDAOImpl implements BoardDAO {
     public void modifyBoard(BoardVo param) {
         sqlSession.update(NAMESPACE + ".modifyBoard", param);
     }
+
+    //  게시글 삭제
+    @Override
+    @LogException
+    public void deletePosting(int boardNo) {
+        sqlSession.delete(NAMESPACE + ".deletePosting", boardNo);
+    }
 }

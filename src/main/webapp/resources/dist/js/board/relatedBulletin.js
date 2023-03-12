@@ -103,9 +103,20 @@ window.addEventListener("DOMContentLoaded", function () {
 
     $(".delBtn").click(function () {
         if (confirm("해당 게시글을 정말로 삭제 하시겠습니까??")) {
-            formObj.attr("action", "../board/deletePosting");
-            formObj.attr("method", "post");
-            formObj.submit();
+            $.ajax({
+                type: "post",
+                url: "../board/deletePosting",
+                data: {
+                    boardNo : $("#boardNo").val()
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.result == "success") {
+                        alert("게시글 삭제에 성공 하였습니다.");
+                        postingList($("#categoryNo").val());
+                    }
+                }
+            })
         }
     });
 })

@@ -68,4 +68,15 @@ public class RestBoardController {
 
         return data;
     }
+
+    //  게시글 삭제 프로시저
+    @PostMapping(value = "deletePosting")
+    @LogException
+    public HashMap<String, Object> deletePosting(int boardNo) {
+
+        data.put("result", "success");
+        boardService.deletePosting(boardNo);
+
+        return data;
+    }
 }
