@@ -13,6 +13,7 @@
 
 package com.spring.practice.board.service;
 
+import com.spring.practice.board.domain.BoardLikeVo;
 import com.spring.practice.board.domain.BoardVo;
 import com.spring.practice.board.domain.CategoryVo;
 import com.spring.practice.board.domain.ViewPageVo;
@@ -56,11 +57,13 @@ public class BoardServiceImpl implements BoardService{
             int userNo = boardVo.getUser_no();
             UserVo userVo = userDAO.getUserByNo(userNo);
             CategoryVo categoryVo = boardDAO.getCategoryByNo(boardVo.getCategory_no());
+            int totalLikeCount = boardDAO.getTotalLikeCount(boardVo.getBoard_no());
 
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("boardVo", boardVo);
             map.put("userVo", userVo);
             map.put("categoryVo", categoryVo);
+            map.put("totalLikeCount", totalLikeCount);
 
             data.add(map);
         }
@@ -88,10 +91,12 @@ public class BoardServiceImpl implements BoardService{
 
         BoardVo boardVo = boardDAO.getBoardByNo(board_no);
         UserVo userVo = userDAO.getUserByNo(boardVo.getUser_no());
+        int totalLikeCount = boardDAO.getTotalLikeCount(board_no);
 
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("userVo", userVo);
         map.put("boardVo", boardVo);
+        map.put("totalLikeCount", totalLikeCount);
 
         return map;
     }
@@ -168,5 +173,30 @@ public class BoardServiceImpl implements BoardService{
 
         //  게시글 삭제
         boardDAO.deletePosting(boardNo);
+    }
+
+    //  게시글 좋아요
+    @Override
+    @LogException
+    public void doLike(BoardLikeVo likeVo) {
+        if (getMyLikeCount(likeVo) < 1) {
+            boardDAO.doLike(likeVo);
+        } else {
+            boardDAO.deleteLike(likeVo);
+        }
+    }
+
+    //  게시글 좋아요 상태
+    @Override
+    @LogException
+    public int getMyLikeCount(BoardLikeVo likeVo) {
+        return boardDAO.getMyLikeCount(likeVo);
+    }
+
+    //  게시글 좋아요 총 갯수
+    @Override
+    @LogException
+    public int getTotalLikeCount(int board_no) {
+        return boardDAO.getTotalLikeCount(board_no);
     }
 }

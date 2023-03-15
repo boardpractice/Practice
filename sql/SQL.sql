@@ -133,6 +133,23 @@ create table eden_view_page
     constraint eden_view_board_no foreign key(board_no) references eden_board (board_no)
 );
 
---  게시판 조회수 시퀸스
+--  게시글 조회수 시퀸스
 drop sequence eden_view_page_seq;
 create sequence eden_view_page_seq;
+
+--  게시글 좋아요 테이블
+drop table eden_board_like;
+create table eden_board_like(
+    like_no number primary key,
+    user_no number,
+    board_no number,
+    like_date date default sysdate,
+    constraint eden_like_userNo foreign key (user_no) references eden_user(user_no),
+    constraint eden_like_boardNo foreign key (board_no) references eden_board(board_no)
+);
+
+--  게시글 좋아요 시퀸스
+drop sequence eden_board_like_seq;
+create sequence eden_board_like_seq;
+
+

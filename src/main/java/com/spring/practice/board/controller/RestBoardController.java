@@ -13,6 +13,7 @@
 
 package com.spring.practice.board.controller;
 
+import com.spring.practice.board.domain.BoardLikeVo;
 import com.spring.practice.board.domain.BoardVo;
 import com.spring.practice.board.service.BoardService;
 import com.spring.practice.commons.annotation.LogException;
@@ -77,6 +78,77 @@ public class RestBoardController {
         data.put("result", "success");
         boardService.deletePosting(boardNo);
 
+        return data;
+    }
+
+    //  게시글 좋아요 및 좋아요 취소
+    @PostMapping(value = "doLike")
+    @LogException
+    public HashMap<String, Object> doLike(BoardLikeVo param, HttpSession session) {
+        UserVo sessionUser = (UserVo) session.getAttribute("sessionUser");
+
+        if (sessionUser == null) {
+            data.put("result", "error");
+            data.put("reason", "로그인이 필요합니다.");
+            return data;
+        }
+
+        int myLikeCount = boardService.getMyLikeCount(param);
+
+        data.put("result", "success");
+
+        if (myLikeCount > 0) {
+            data.put("status", "like");
+        } else {
+            data.put("status", "unlike");
+        }
+
+        int userNo = sessionUser.getUser_no();
+        param.setUser_no(userNo);
+
+        boardService.doLike(param);
+
+        data.put("result", "success");
+
+        return data;
+    }
+
+    //  게시글 좋아요 상태
+    @PostMapping("getMyLikeStatus")
+    @LogException
+    public HashMap<String, Object> getMyLikeStatus(BoardLikeVo param, HttpSession session) {
+        HashMap<String, Object> data = new HashMap<>();
+
+        UserVo sessionUser = (UserVo) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            data.put("result", "error");
+            data.put("reason", "로그인이 필요합니다.");
+            return data;
+        }
+
+        param.setUser_no(sessionUser.getUser_no());
+
+        int myLikeCount = boardService.getMyLikeCount(param);
+
+        data.put("result", "success");
+
+        if (myLikeCount > 0) {
+            data.put("status", "like");
+        } else {
+            data.put("status", "unlike");
+        }
+
+        return data;
+    }
+
+    //  게시글 좋아요 총 갯수
+    @PostMapping(value = "getTotalLikeCount")
+    @LogException
+    public HashMap<String, Object> getTotalLikeCount(int board_no){
+        HashMap<String, Object> data = new HashMap<String, Object>();
+
+        int totalLikeCount = boardService.getTotalLikeCount(board_no);
+        data.put("totalLikeCount", totalLikeCount);
         return data;
     }
 }

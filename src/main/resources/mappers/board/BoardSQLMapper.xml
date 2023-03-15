@@ -91,4 +91,27 @@
     <delete id="deletePosting">
         delete from eden_board where board_no = #{boardNo}
     </delete>
+
+    <!-- 게시글 좋아요 -->
+    <insert id="doLike">
+        insert into eden_board_like (like_no, user_no, board_no)
+        values (eden_board_like_seq.nextval,
+                #{user_no},
+                #{board_no})
+    </insert>
+
+    <!-- 게시글 좋아요 상태 확인 -->
+    <select id="getMyLikeCount" resultType="int">
+        select count(*) from eden_board_like where board_no = #{board_no} and user_no = #{user_no}
+    </select>
+
+    <!-- 게시글 좋아요 취소 -->
+    <delete id="deleteLike">
+        delete from eden_board_like where board_no = #{board_no} and user_no = #{user_no}
+    </delete>
+
+    <!-- 게시글 좋아요 총 갯수 -->
+    <select id="getTotalLikeCount" resultType="int">
+        select count(*) from eden_board_like where board_no = #{board_no}
+    </select>
 </mapper>

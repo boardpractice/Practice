@@ -13,6 +13,7 @@
 
 package com.spring.practice.board.service;
 
+import com.spring.practice.board.domain.BoardLikeVo;
 import com.spring.practice.board.domain.BoardVo;
 import com.spring.practice.board.domain.CategoryVo;
 import com.spring.practice.board.domain.ViewPageVo;
@@ -63,4 +64,13 @@ public interface BoardService {
     
     //  게시글 삭제
     public void deletePosting(int boardNo);
+
+    //  게시글 좋아요
+    public void doLike(BoardLikeVo likeVo);
+
+    //  게시글 좋아요 상태
+    public int getMyLikeCount(BoardLikeVo likeVo);
+
+    //  게시글 좋아요 총 갯수
+    public int getTotalLikeCount(int board_no);
 }
