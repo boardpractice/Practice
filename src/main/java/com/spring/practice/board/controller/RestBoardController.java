@@ -8,7 +8,7 @@
 작성일시 : 2023-03-09
 작성자 : EdenDev
 작성시간 : 오후 4:26
-용도 : 
+용도 : board web page application data Json conversion requests Handling
 */
 
 package com.spring.practice.board.controller;
@@ -23,7 +23,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;

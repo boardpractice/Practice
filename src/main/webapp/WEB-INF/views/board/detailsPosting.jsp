@@ -80,9 +80,8 @@ Purpose : Web Details Posting View Page
                                 class="fa fa-list"></i> 목록
                         </button>
                         <c:if test="${!empty sessionUser}">
-                            <button type="button" class="btn btn-info boardLike"><i class="fa-regular fa-thumbs-up"
-                                                                                    id="like"></i> 좋아요
-                            </button>
+                            <button type="button" class="btn btn-info text-lg-center" id="boardLike"> 좋아요</button>
+                            <button type="button" class="btn btn-info text-lg-center" id="postingBookMark"> 북마크</button>
                         </c:if>
                         <c:if test="${sessionUser.user_no == data.boardVo.user_no}">
                             <div class="pull-right">

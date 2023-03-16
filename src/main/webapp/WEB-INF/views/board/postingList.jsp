@@ -49,6 +49,7 @@ Purpose : Web Posting List View Page
                         <th class="col-xs-2">작성자</th>
                         <th class="col-xs-2">작성일</th>
                         <th class="col-xs-1">조회수</th>
+                        <th class="col-xs-1">좋아요</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,8 +62,10 @@ Purpose : Web Posting List View Page
                                 <span class="badge bg-teal"><i class="fa fa-comment-o"></i> + ${data.totalCommentCount}</span>
                             </td>
                             <td>${data.userVo.user_nickname}</td>
-                            <td><fmt:formatDate value="${data.boardVo.board_write_date }" pattern="yyyy:MM:dd: HH:mm:ss" /></td>
+                            <td><fmt:formatDate value="${data.boardVo.board_write_date }"
+                                                pattern="yyyy:MM:dd: HH:mm:ss"/></td>
                             <td><span class="badge bg-red">${data.boardVo.board_view_count}</span></td>
+                            <td><span class="badge bg-teal">${data.totalLikeCount}</span></td>
                         </tr>
                     </c:forEach>
                     </tbody>

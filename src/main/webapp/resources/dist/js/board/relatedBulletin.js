@@ -28,7 +28,7 @@ function writePosting(category_no) {
 }
 
 function goPage(board_no) {
-    const form= $("form[name='detailsForm']");
+    const form = $("form[name='detailsForm']");
     $("#boardNo").attr("value", board_no);
     form.attr("action", "../board/detailsPosting");
     form.attr("method", "post");
@@ -107,7 +107,7 @@ window.addEventListener("DOMContentLoaded", function () {
                 type: "post",
                 url: "../board/deletePosting",
                 data: {
-                    boardNo : $("#boardNo").val()
+                    boardNo: $("#boardNo").val()
                 },
                 dataType: "json",
                 success: function (data) {
@@ -134,6 +134,7 @@ window.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    const boardLike = document.getElementById('boardLike');
     var getMyLikeStatus = function () {
         $.ajax({
             type: "post",
@@ -148,19 +149,21 @@ window.addEventListener("DOMContentLoaded", function () {
                 if (data.result == 'error') {
                     console.log(data.reason);
                 } else if (data.status == 'like') {
-                    $(".boardLike").text("좋아요 취소");
-                    $("#like").attr("class", "fa-regular fa-thumbs-down");
+                    boardLike.innerText = '좋아요 취소';
+                    boardLike.className += "fa-regular fa-thumbs-down";
                 } else if (data.status == 'unlike') {
-                    $(".boardLike").text("좋아요");
-                    $("#like").attr("class", "fa-regular fa-thumbs-up");
+                    boardLike.innerText = '좋아요';
+                    boardLike.className += 'fa-regular fa-thumbs-up';
                 }
             }
         });
     }
 
-    getMyLikeStatus();
+    if (location.pathname.includes('detailsPosting')) {
+        getMyLikeStatus();
+    }
 
-    $(".boardLike").click(function () {
+    $("#boardLike").click(function () {
         $.ajax({
             type: "post",
             url: "../board/doLike",
