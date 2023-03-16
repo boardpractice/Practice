@@ -46,7 +46,7 @@ Purpose : Web Write Posting View Page
 
                         <div class="row mt-1">
                             <div class="col-lg-5">
-                                <select path="category_no" class="form-control" id="categoryList">
+                                <select name="category_no" class="form-control" id="categoryList">
                                     <c:forEach items="${list}" var="category">
                                         <c:choose>
                                             <c:when test="${category_no == category.category_no}">
