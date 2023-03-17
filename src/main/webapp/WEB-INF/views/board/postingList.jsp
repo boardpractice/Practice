@@ -71,6 +71,42 @@ Purpose : Web Posting List View Page
                     </tbody>
                 </table>
             </div>
+
+            <div class="box-footer">
+                <form id="searchForm" action="../board/postingList" method="post">
+                    <input type="hidden" name="category_no" value="${category_no}">
+                    <div class="form-group col-sm-2">
+                        <select name="search_category_no" class="form-control" id="categoryList">
+                            <c:forEach items="${list}" var="search">
+                                <c:choose>
+                                    <c:when test="${search_category_no == search.search_category_no}">
+                                        <option value="${search.search_category_no}" selected>
+                                                ${search.search_type}
+                                        </option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${search.search_category_no}">
+                                                ${search.search_type}
+                                        </option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="keyword" id="keywordInput"
+                                   value="${keyword}" placeholder="검색어">
+                            <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-primary btn-flat" id="searchBtn">
+                                        <i class="fa fa-search"></i> 검색
+                                    </button>
+                                </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
             <div class="box-footer">
                 <div class="pull-right">
                     <a class="btn btn-success btn-flat" href="javascript:writePosting(${category_no});">

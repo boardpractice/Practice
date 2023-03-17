@@ -13,20 +13,17 @@
 
 package com.spring.practice.board.persistence;
 
-import com.spring.practice.board.domain.BoardLikeVo;
-import com.spring.practice.board.domain.BoardVo;
-import com.spring.practice.board.domain.CategoryVo;
-import com.spring.practice.board.domain.ViewPageVo;
+import com.spring.practice.board.domain.*;
 
 import java.util.List;
 
 public interface BoardDAO {
 
     //  게시글 목록
-    public List<BoardVo> getBoardList();
+    public List<BoardVo> getBoardList(int search_category_no, String keyword);
 
     //  게시글 목록 (카테고리별 정렬)
-    public List<BoardVo> getBoardByCategoryList(int category_no);
+    public List<BoardVo> getBoardByCategoryList(int category_no, int search_category_no, String keyword);
 
     //  게시글 카테고리 정보
     public CategoryVo getCategoryByNo(int category_no);
@@ -80,4 +77,7 @@ public interface BoardDAO {
 
     //  게시글 좋아요 총 갯수
     public int getTotalLikeCount(int board_no);
+
+    //  게시글 검색 카테고리 목록
+    public List<SearchCategoryVo> getBoardSearchCategoryList();
 }

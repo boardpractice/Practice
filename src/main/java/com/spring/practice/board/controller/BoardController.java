@@ -36,11 +36,14 @@ public class BoardController {
     //  게시글 목록 페이지
     @PostMapping(value = "postingList")
     @LogException
-    public String postingList(@RequestParam(value = "category_no", defaultValue = "0") int category_no, Model model) {
+    public String postingList(@RequestParam(value = "category_no", defaultValue = "0") int category_no, Model model, @RequestParam(value = "search_category_no", defaultValue = "0") int search_category_no, @RequestParam(value = "keyword", defaultValue = "") String keyword) {
 
-        ArrayList<HashMap<String, Object>> dataList = boardService.getBoardList(category_no);
+        ArrayList<HashMap<String, Object>> dataList = boardService.getBoardList(category_no, search_category_no, keyword);
         model.addAttribute("category_no", category_no);
         model.addAttribute("dataList", dataList);
+        model.addAttribute("list", boardService.getBoardSearchCategoryList());
+        model.addAttribute("search_category_no", search_category_no);
+        model.addAttribute("keyword", keyword);
 
         return "board/postingList";
     }

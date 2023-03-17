@@ -5,12 +5,82 @@
 
     <!-- 게시글 목록 -->
     <select id="getBoardList" resultType="BoardVo">
-        select * from eden_board
+        select eb.* from eden_board eb, eden_user eu where eb.user_no = eu.user_no
+        <if test="search_category_no != 0">
+            <choose>
+                <!-- 게시글 제목 검색 -->
+                <when test="search_category_no == 1">
+                    and eb.board_title like '%' || #{keyword} || '%'
+                </when>
+
+                <!-- 게시글 내용 검색 -->
+                <when test="search_category_no == 2">
+                    and eb.board_content like '%' || #{keyword} || '%'
+                </when>
+
+                <!-- 게시글 작성자 검색 -->
+                <when test="search_category_no == 3">
+                    and eu.user_nickname like '%' || #{keyword} || '%'
+                </when>
+
+                <!-- 게시글 제목 + 내용 검색 -->
+                <when test="search_category_no == 4">
+                    and (eb.board_title like '%' || #{keyword} || '%' or eb.board_content like '%' || #{keyword} || '%')
+                </when>
+
+                <!-- 게시글 작성자 + 내용 검색 -->
+                <when test="search_category_no == 5">
+                    and (eu.user_nickname like '%' || #{keyword} || '%' or eb.board_content like '%' || #{keyword} || '%')
+                </when>
+
+                <!-- 게시글 전체 검색 -->
+                <when test="search_category_no == 6">
+                    and (eb.board_title like '%' || #{keyword} || '%' or eb.board_content like '%' || #{keyword} || '%'
+                    or eu.user_nickname like '%' || #{keyword} || '%')
+                </when>
+
+            </choose>
+        </if>
     </select>
 
     <!-- 게시글 목록 (카테고리별 정렬) -->
     <select id="getBoardByCategoryList" resultType="BoardVo">
-        select * from eden_board where category_no = #{category_no}
+        select eb.* from eden_board eb, eden_user eu where eb.user_no = eu.user_no and eb.category_no = #{category_no}
+        <if test="search_category_no != 0">
+            <choose>
+                <!-- 게시글 제목 검색 -->
+                <when test="search_category_no == 1">
+                    and eb.board_title like '%' || #{keyword} || '%'
+                </when>
+
+                <!-- 게시글 내용 검색 -->
+                <when test="search_category_no == 2">
+                    and eb.board_content like '%' || #{keyword} || '%'
+                </when>
+
+                <!-- 게시글 작성자 검색 -->
+                <when test="search_category_no == 3">
+                    and eu.user_nickname like '%' || #{keyword} || '%'
+                </when>
+
+                <!-- 게시글 제목 + 내용 검색 -->
+                <when test="search_category_no == 4">
+                    and (eb.board_title like '%' || #{keyword} || '%' or eb.board_content like '%' || #{keyword} || '%')
+                </when>
+
+                <!-- 게시글 작성자 + 내용 검색 -->
+                <when test="search_category_no == 5">
+                    and (eu.user_nickname like '%' || #{keyword} || '%' or eb.board_content like '%' || #{keyword} || '%')
+                </when>
+
+                <!-- 게시글 전체 검색 -->
+                <when test="search_category_no == 6">
+                    and (eb.board_title like '%' || #{keyword} || '%' or eb.board_content like '%' || #{keyword} || '%'
+                    or eu.user_nickname like '%' || #{keyword} || '%')
+                </when>
+
+            </choose>
+        </if>
     </select>
 
     <!-- 카테고리 정보 -->
@@ -113,5 +183,10 @@
     <!-- 게시글 좋아요 총 갯수 -->
     <select id="getTotalLikeCount" resultType="int">
         select count(*) from eden_board_like where board_no = #{board_no}
+    </select>
+
+    <!-- 게시글 검색 카테고리 목록 -->
+    <select id="getBoardSearchCategoryList" resultType="SearchCategoryVo">
+        select * from eden_board_search_category
     </select>
 </mapper>

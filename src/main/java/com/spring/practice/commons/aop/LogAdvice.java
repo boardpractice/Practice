@@ -47,9 +47,6 @@ public class LogAdvice {
 
     @AfterReturning(value = "@annotation(com.spring.practice.commons.annotation.LogException)", returning = "result")
     public void AfterReturning(JoinPoint joinPoint, Object result) {
-        logger.info("실행된 클래스 : " + joinPoint.getTarget().getClass().getSimpleName());
-        logger.info("실행된 메서드 : " + joinPoint.getSignature().getName());
-        logger.info("전달된 파라미터 : " + Arrays.toString(joinPoint.getArgs()));
 
     }
 }

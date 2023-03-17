@@ -13,10 +13,7 @@
 
 package com.spring.practice.board.service;
 
-import com.spring.practice.board.domain.BoardLikeVo;
-import com.spring.practice.board.domain.BoardVo;
-import com.spring.practice.board.domain.CategoryVo;
-import com.spring.practice.board.domain.ViewPageVo;
+import com.spring.practice.board.domain.*;
 import com.spring.practice.board.persistence.BoardDAO;
 import com.spring.practice.commons.annotation.LogException;
 import com.spring.practice.user.domain.UserVo;
@@ -29,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Service
-public class BoardServiceImpl implements BoardService{
+public class BoardServiceImpl implements BoardService {
 
     @Autowired
     BoardDAO boardDAO;
@@ -41,18 +38,17 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     @LogException
-    public ArrayList<HashMap<String, Object>> getBoardList(int category_no) {
+    public ArrayList<HashMap<String, Object>> getBoardList(int category_no, int search_category_no, String keyword) {
 
         ArrayList<HashMap<String, Object>> data = new ArrayList<HashMap<String, Object>>();
 
         List<BoardVo> boardVoList;
 
         if (category_no != 0) {
-            boardVoList = boardDAO.getBoardByCategoryList(category_no);
+            boardVoList = boardDAO.getBoardByCategoryList(category_no, search_category_no, keyword);
         } else {
-            boardVoList = boardDAO.getBoardList();
+            boardVoList = boardDAO.getBoardList(search_category_no, keyword);
         }
-
         for (BoardVo boardVo : boardVoList) {
             int userNo = boardVo.getUser_no();
             UserVo userVo = userDAO.getUserByNo(userNo);
@@ -198,5 +194,12 @@ public class BoardServiceImpl implements BoardService{
     @LogException
     public int getTotalLikeCount(int board_no) {
         return boardDAO.getTotalLikeCount(board_no);
+    }
+
+    //  게시글 검색 카테고리 목록
+    @Override
+    @LogException
+    public List<SearchCategoryVo> getBoardSearchCategoryList() {
+        return boardDAO.getBoardSearchCategoryList();
     }
 }
