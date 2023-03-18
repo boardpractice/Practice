@@ -39,9 +39,6 @@ public class BoardDAOImpl implements BoardDAO {
         param.put("search_category_no", search_category_no);
         param.put("keyword", keyword);
 
-        System.out.println("search_category_no : " + search_category_no);
-        System.out.println("keyword : " + keyword);
-
         return sqlSession.selectList(NAMESPACE + ".getBoardList", param);
     }
 
@@ -54,10 +51,6 @@ public class BoardDAOImpl implements BoardDAO {
         param.put("category_no", category_no);
         param.put("search_category_no", search_category_no);
         param.put("keyword", keyword);
-
-        System.out.println("category_no : " + category_no);
-        System.out.println("search_category_no : " + search_category_no);
-        System.out.println("keyword : " + keyword);
 
         return sqlSession.selectList(NAMESPACE + ".getBoardByCategoryList", param);
     }
