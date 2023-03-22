@@ -11,6 +11,15 @@
 용도 : JavaScript associated with a Bulletin
 */
 
+function paging(page, category_no) {
+    const formObj = $("form[name='listForm']");
+    $("#pageNum").attr("value", page);
+    $("#CATEGORY_NO").attr("value", category_no);
+    formObj.attr("action", "../board/postingList");
+    formObj.attr("method", "post");
+    formObj.submit();
+}
+
 function postingList(category_no) {
     const form = $("form[id='list']");
     $("#category_no").attr("value", category_no);

@@ -36,9 +36,26 @@ public class BoardController {
     //  게시글 목록 페이지
     @PostMapping(value = "postingList")
     @LogException
-    public String postingList(@RequestParam(value = "category_no", defaultValue = "0") int category_no, Model model, @RequestParam(value = "search_category_no", defaultValue = "0") int search_category_no, @RequestParam(value = "keyword", defaultValue = "") String keyword) {
+    public String postingList(@RequestParam(value = "category_no", defaultValue = "0") int category_no, Model model, @RequestParam(value = "search_category_no", defaultValue = "0") int search_category_no, @RequestParam(value = "keyword", defaultValue = "") String keyword, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 
-        ArrayList<HashMap<String, Object>> dataList = boardService.getBoardList(category_no, search_category_no, keyword);
+        ArrayList<HashMap<String, Object>> dataList = boardService.getBoardList(category_no, search_category_no, keyword, pageNum);
+        int count = boardService.getBoardCount(search_category_no, keyword);
+
+        int totalPageCount = (int) Math.ceil(count / 10.0);
+
+        // 1 2 3 4 5 , 6 7 8 9 10
+        int startPage = ((pageNum - 1) / 5) * 5 + 1;
+        int endPage = ((pageNum - 1) / 5 + 1) * (5);
+        if (endPage > totalPageCount) {
+            endPage = totalPageCount;
+        }
+
+        model.addAttribute("count", count);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("totalPageCount", totalPageCount);
+
         model.addAttribute("category_no", category_no);
         model.addAttribute("dataList", dataList);
         model.addAttribute("list", boardService.getBoardSearchCategoryList());

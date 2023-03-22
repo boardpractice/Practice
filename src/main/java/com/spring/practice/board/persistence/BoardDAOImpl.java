@@ -33,11 +33,12 @@ public class BoardDAOImpl implements BoardDAO {
     //  게시글 목록
     @Override
     @LogException
-    public List<BoardVo> getBoardList(int search_category_no, String keyword) {
+    public List<BoardVo> getBoardList(int search_category_no, String keyword, int pageNum) {
 
         HashMap<String, Object> param = new HashMap<>();
         param.put("search_category_no", search_category_no);
         param.put("keyword", keyword);
+        param.put("pageNum", pageNum);
 
         return sqlSession.selectList(NAMESPACE + ".getBoardList", param);
     }
@@ -45,12 +46,13 @@ public class BoardDAOImpl implements BoardDAO {
     //  게시글 목록 (카테고리별 정렬)
     @Override
     @LogException
-    public List<BoardVo> getBoardByCategoryList(int category_no, int search_category_no, String keyword) {
+    public List<BoardVo> getBoardByCategoryList(int category_no, int search_category_no, String keyword, int pageNum) {
 
         HashMap<String, Object> param = new HashMap<>();
         param.put("category_no", category_no);
         param.put("search_category_no", search_category_no);
         param.put("keyword", keyword);
+        param.put("pageNum", pageNum);
 
         return sqlSession.selectList(NAMESPACE + ".getBoardByCategoryList", param);
     }
@@ -186,5 +188,16 @@ public class BoardDAOImpl implements BoardDAO {
     @LogException
     public List<SearchCategoryVo> getBoardSearchCategoryList() {
         return sqlSession.selectList(NAMESPACE + ".getBoardSearchCategoryList");
+    }
+
+    //  게시글 총 갯수
+    @Override
+    @LogException
+    public int getBoardCount(int search_category_no, String keyword) {
+        HashMap<String, Object> param = new HashMap<String, Object>();
+        param.put("search_category_no", search_category_no);
+        param.put("keyword", "keyword");
+
+        return sqlSession.selectOne(NAMESPACE + ".getBoardCount", param);
     }
 }

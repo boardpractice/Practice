@@ -38,16 +38,16 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     @LogException
-    public ArrayList<HashMap<String, Object>> getBoardList(int category_no, int search_category_no, String keyword) {
+    public ArrayList<HashMap<String, Object>> getBoardList(int category_no, int search_category_no, String keyword, int pageNum) {
 
         ArrayList<HashMap<String, Object>> data = new ArrayList<HashMap<String, Object>>();
 
         List<BoardVo> boardVoList;
 
         if (category_no != 0) {
-            boardVoList = boardDAO.getBoardByCategoryList(category_no, search_category_no, keyword);
+            boardVoList = boardDAO.getBoardByCategoryList(category_no, search_category_no, keyword, pageNum);
         } else {
-            boardVoList = boardDAO.getBoardList(search_category_no, keyword);
+            boardVoList = boardDAO.getBoardList(search_category_no, keyword, pageNum);
         }
         for (BoardVo boardVo : boardVoList) {
             int userNo = boardVo.getUser_no();
@@ -201,5 +201,12 @@ public class BoardServiceImpl implements BoardService {
     @LogException
     public List<SearchCategoryVo> getBoardSearchCategoryList() {
         return boardDAO.getBoardSearchCategoryList();
+    }
+
+    //  게시글 총 갯수
+    @Override
+    @LogException
+    public int getBoardCount(int search_category_no, String keyword) {
+        return boardDAO.getBoardCount(search_category_no, keyword);
     }
 }
