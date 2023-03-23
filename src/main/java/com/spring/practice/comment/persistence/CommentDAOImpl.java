@@ -42,4 +42,11 @@ public class CommentDAOImpl implements CommentDAO {
     public int getTotalCommentCount(int board_no) {
         return sqlSession.selectOne(NAMESPACE + ".getTotalCommentCount", board_no);
     }
+
+    //  댓글 작성
+    @Override
+    @LogException
+    public void writeComment(CommentVo commentVo) {
+        sqlSession.insert(NAMESPACE + ".writeComment", commentVo);
+    }
 }

@@ -14,4 +14,9 @@
     <select id="getTotalCommentCount" resultType="int">
         select count(*) from eden_board_comment where board_no = #{board_no}
     </select>
+
+    <!-- 댓글 작성 -->
+    <insert id="writeComment">
+        insert into eden_board_comment (comment_no, board_no, user_no, comment_content) values (eden_board_comment_seq.nextval, #{board_no}, #{user_no}, #{comment_content})
+    </insert>
 </mapper>

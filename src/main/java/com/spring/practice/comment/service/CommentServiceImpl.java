@@ -63,4 +63,11 @@ public class CommentServiceImpl implements CommentService{
     public int getTotalCommentCount(int board_no) {
         return commentDAO.getTotalCommentCount(board_no);
     }
+
+    //  댓글 작성
+    @Override
+    @LogException
+    public void writeComment(CommentVo param) {
+        commentDAO.writeComment(param);
+    }
 }

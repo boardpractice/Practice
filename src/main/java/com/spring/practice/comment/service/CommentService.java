@@ -13,6 +13,8 @@
 
 package com.spring.practice.comment.service;
 
+import com.spring.practice.comment.domain.CommentVo;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,4 +25,6 @@ public interface CommentService {
 
     //  댓글 총 갯수
     public int getTotalCommentCount(int board_no);
+
+    public void writeComment(CommentVo param);
 }

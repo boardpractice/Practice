@@ -44,4 +44,24 @@ window.addEventListener("DOMContentLoaded", function () {
     }
 
     commentList();
+
+    $(".commentAddBtn").click(function () {
+        $.ajax({
+            type: "post",
+            url: "../comment/writeComment",
+            data: {
+                board_no: $("#boardNo").val(),
+                comment_content: $("#newCommentText").val()
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data == "error") {
+                    alert("서버와 통신중 에러가 발생했습니다. 다시 확인해주세요");
+                } else {
+                    alert("댓글 작성에 성공 하였습니다.");
+                    location.reload();
+                }
+            }
+        });
+    });
 });

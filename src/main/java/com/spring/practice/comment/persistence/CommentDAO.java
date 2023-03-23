@@ -23,4 +23,7 @@ public interface CommentDAO {
 
     //  댓글 총 갯수
     public int getTotalCommentCount(int board_no);
+
+    //  댓글 작성
+    public void writeComment(CommentVo commentVo);
 }

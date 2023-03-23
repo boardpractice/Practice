@@ -56,7 +56,8 @@ Purpose : Web Details Posting View Page
                                 <li class="dropdown messages-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <img class="img-circle img-bordered-sm"
-                                             src="${path}/resources/dist/img/profile/${data.userVo.user_image}" alt="user image">
+                                             src="${path}/resources/dist/img/profile/${data.userVo.user_image}"
+                                             alt="user image">
                                         <span>${data.userVo.user_nickname}</span>
                                         <span class="description"><fmt:formatDate pattern="yyyy-MM-dd a HH:mm"
                                                                                   value="${data.boardVo.board_write_date}"/></span>
@@ -76,7 +77,9 @@ Purpose : Web Details Posting View Page
                             <input type="hidden" id="userNo" name="user_no" value="${sessionUser.user_no}">
                             <input type="hidden" id="categoryNo" name="category_no" value="${data.boardVo.category_no}">
                         </form>
-                        <button class="btn btn-primary" onclick="postingList(${data.boardVo.category_no})"><i class="fa fa-list"></i> 목록</button>
+                        <button class="btn btn-primary" onclick="postingList(${data.boardVo.category_no})"><i
+                                class="fa fa-list"></i> 목록
+                        </button>
                         <c:if test="${!empty sessionUser}">
                             <button type="button" class="btn btn-info text-lg-center" id="boardLike"> 좋아요</button>
                             <button type="button" class="btn btn-info text-lg-center" id="postingBookMark"> 북마크</button>
@@ -91,6 +94,48 @@ Purpose : Web Details Posting View Page
                         </c:if>
                     </div>
                 </div>
+
+                <%--댓글 입력 영역--%>
+                <c:if test="${!empty sessionUser}">
+                    <div class="box box-warning">
+                        <div class="box-header with-border">
+                            <a class="link-black text-lg"><i class="fa fa-pencil"></i> 댓글작성</a>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal">
+                                <div class="form-group margin-bottom-none">
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" id="newCommentText" rows="3"
+                                                  placeholder="댓글을 입력해주세요..." style="resize: none"></textarea>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input class="form-control" id="newCommentWriter" type="text"
+                                               value="${sessionUser.user_nickname}"
+                                               readonly="readonly">
+                                    </div>
+                                    <hr/>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary btn-block commentAddBtn"><i
+                                                class="fa fa-save"></i> 저장
+                                        </button>
+                                    </div>
+                                    <!-- 댓글 작성자 정보 -->
+                                    <input type="hidden" id="writer" value="${data.userVo.user_id}">
+                                    <input type="hidden" id="commentWriter" value="${sessionUser.user_id}">
+                                    <input type="hidden" id="title" value="${data.boardVo.board_title}">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </c:if>
+                <c:if test="${empty sessionUser}">
+                    <div class="box box-warning">
+                        <div class="box-header with-border">
+                            <p><i class="fa fa-pencil"></i> 댓글 작성을 위해 <a href="${path}/user/login"
+                                                                         class="link-black text-lg">로그인</a>해주세요</p>
+                        </div>
+                    </div>
+                </c:if>
 
 
                 <%--댓글 목록 영역--%>
