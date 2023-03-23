@@ -11,6 +11,7 @@
         <typeAlias type="com.spring.practice.board.domain.CategoryVo" alias="CategoryVo" />
         <typeAlias type="com.spring.practice.board.domain.ViewPageVo" alias="ViewPageVo" />
         <typeAlias type="com.spring.practice.board.domain.SearchCategoryVo" alias="SearchCategoryVo" />
+        <typeAlias type="com.spring.practice.comment.domain.CommentVo" alias="CommentVo" />
     </typeAliases>
 
 </configuration>

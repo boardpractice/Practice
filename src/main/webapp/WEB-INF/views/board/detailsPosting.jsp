@@ -30,7 +30,6 @@ Purpose : Web Details Posting View Page
 
             <div class="col-lg-12">
 
-
                 <%--게시글 내용 영역--%>
                 <div class="box box-primary">
 
@@ -40,8 +39,8 @@ Purpose : Web Details Posting View Page
                         <ul class="list-inline pull-right">
                             <li><a href="#" class="link-black text-lg" id="likeCount">좋아요 수(${data.totalLikeCount})</a>
                             </li>
-                            <li><span><i class="fa fa-eye"></i>조회수
-                                (${data.boardVo.board_view_count})</span></li>
+                            <li><a href="#" class="link-black text-lg"><i class="fa fa-eye"></i>조회수
+                                (${data.boardVo.board_view_count})</a></li>
                         </ul>
                     </div>
 
@@ -64,6 +63,7 @@ Purpose : Web Details Posting View Page
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">작성 글보기</a></li>
+                                        <li><a href="#">작성 댓글보기</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -76,9 +76,7 @@ Purpose : Web Details Posting View Page
                             <input type="hidden" id="userNo" name="user_no" value="${sessionUser.user_no}">
                             <input type="hidden" id="categoryNo" name="category_no" value="${data.boardVo.category_no}">
                         </form>
-                        <button class="btn btn-primary" onclick="postingList(${data.boardVo.category_no})"><i
-                                class="fa fa-list"></i> 목록
-                        </button>
+                        <button class="btn btn-primary" onclick="postingList(${data.boardVo.category_no})"><i class="fa fa-list"></i> 목록</button>
                         <c:if test="${!empty sessionUser}">
                             <button type="button" class="btn btn-info text-lg-center" id="boardLike"> 좋아요</button>
                             <button type="button" class="btn btn-info text-lg-center" id="postingBookMark"> 북마크</button>
@@ -91,6 +89,56 @@ Purpose : Web Details Posting View Page
                                 </button>
                             </div>
                         </c:if>
+                    </div>
+                </div>
+
+
+                <%--댓글 목록 영역--%>
+                <div class="box box-success collapsed-box">
+                    <%--댓글 유무 / 댓글 갯수 / 댓글 펼치기, 접기--%>
+                    <div class="box-header with-border">
+                        <a href="" class="link-black text-lg"><i class="fa fa-comments-o margin-r-5 commentCount"></i>
+                        </a>
+                        <div class="box-tools">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <%--댓글 목록--%>
+                    <div class="box-body commentDiv">
+                        <c:forEach items="${dataList}" var="comment">
+                            <div class="user-block">
+                                <img class="img-circle img-bordered-sm"
+                                     src="/resources/dist/img/profile/${comment.userVo.user_image}">
+                                <span class="username">
+                                    <a href="#" id="comment_write">${comment.userVo.user_nickname}</a>
+                                </span>
+                                <c:if test="${!empty sessionUser && sessionUser.user_no == comment.userVo.user_no}">
+                                    <a class="pull-right link-black text-sm"
+                                       onclick="modifyComment(${comment.commentVo.comment_no}, ${comment.commentVo.user_no});"><i
+                                            class="fa fa-edit">수정</i></a>
+                                    <a class="pull-right link-black text-sm"
+                                       onclick="deleteComment(${comment.commentVo.comment_no});"><i
+                                            class="fa fa-times">삭제</i></a>
+                                </c:if>
+
+                                <span class="description"><fmt:formatDate pattern="yyyy-MM-dd a HH:mm"
+                                                                          value="${comment.commentVo.comment_write_date}"/></span>
+                            </div>
+                            <div class="oldReplytext">${comment.commentVo.comment_content}</div>
+                            <br>
+
+                            <hr style="border : 0px; border-top: 5px #2e383c;"/>
+                        </c:forEach>
+                    </div>
+                    <%--댓글 페이징--%>
+                    <div class="box-footer">
+                        <div class="text-center">
+                            <ul class="pagination pagination-sm no-margin">
+
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

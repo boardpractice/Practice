@@ -34,6 +34,8 @@ Purpose : plugin java script include  jsp file
 <script src="/resources/dist/js/board/relatedBulletin.js" type="text/javascript"></script>
 <!-- related BookMark -->
 <script src="/resources/dist/js/bookmark/relatedBookMark.js" type="text/javascript"></script>
+<!-- related Comment -->
+<script src="/resources/dist/js/comment/relateComment.js" type="text/javascript"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {

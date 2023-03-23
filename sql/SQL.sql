@@ -193,3 +193,22 @@ insert into eden_board_search_category (search_category_no, search_type)
 values (eden_board_search_category_seq.nextval, '내용+작성자');
 insert into eden_board_search_category (search_category_no, search_type)
 values (eden_board_search_category_seq.nextval, '전체');
+
+--  게시글 코멘트
+drop table eden_board_comment;
+create table eden_board_comment(
+    comment_no number primary key,
+    board_no number,
+    user_no number,
+    comment_content varchar2(4000) default '',
+    comment_write_date date default sysdate,
+    constraint comment_boardNo foreign key(board_no) references eden_board(board_no),
+    constraint comment_userNo foreign key(user_no) references eden_user(user_no)
+);
+
+--  게시글 코멘트 시퀸스
+drop sequence eden_board_comment_seq;
+create sequence eden_board_comment_seq;
+
+commit;
+

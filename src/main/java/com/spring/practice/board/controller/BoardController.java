@@ -16,6 +16,7 @@ package com.spring.practice.board.controller;
 import com.spring.practice.board.domain.BoardVo;
 import com.spring.practice.board.domain.ViewPageVo;
 import com.spring.practice.board.service.BoardService;
+import com.spring.practice.comment.service.CommentService;
 import com.spring.practice.commons.annotation.LogException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,9 @@ public class BoardController {
 
     @Autowired
     BoardService boardService;
+
+    @Autowired
+    CommentService commentService;
 
 
     //  게시글 목록 페이지
@@ -115,7 +119,7 @@ public class BoardController {
         }
 
         model.addAttribute("data", boardService.getBoard(board_no));
-
+        model.addAttribute("dataList", commentService.getCommentList(board_no));
         return "board/detailsPosting";
 
     }
