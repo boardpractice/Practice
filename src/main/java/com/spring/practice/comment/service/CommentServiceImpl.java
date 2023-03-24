@@ -70,4 +70,16 @@ public class CommentServiceImpl implements CommentService{
     public void writeComment(CommentVo param) {
         commentDAO.writeComment(param);
     }
+
+    //  댓글 수정
+    @Override
+    @LogException
+    public void updateComment(CommentVo commentVo) {
+        commentDAO.updateComment(commentVo);
+    }
+
+    //  댓글 삭제
+    public void deleteComment(int comment_no) {
+        commentDAO.deleteComment(comment_no);
+    }
 }

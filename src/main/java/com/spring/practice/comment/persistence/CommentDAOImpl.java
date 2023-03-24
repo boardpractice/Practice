@@ -49,4 +49,25 @@ public class CommentDAOImpl implements CommentDAO {
     public void writeComment(CommentVo commentVo) {
         sqlSession.insert(NAMESPACE + ".writeComment", commentVo);
     }
+
+    //  댓글 수정
+    @Override
+    @LogException
+    public void updateComment(CommentVo commentVo) {
+        sqlSession.update(NAMESPACE + ".updateComment", commentVo);
+    }
+
+    //  댓글 삭제
+    @Override
+    @LogException
+    public void deleteComment(int comment_no) {
+        sqlSession.delete(NAMESPACE + ".deleteComment", comment_no);
+    }
+
+    //  댓글 전체 삭제
+    @Override
+    @LogException
+    public void deleteAllComment(int boardNo) {
+        sqlSession.delete(NAMESPACE + ".deleteAllComment", boardNo);
+    }
 }

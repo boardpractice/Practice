@@ -12,11 +12,36 @@
 
     <!-- 댓글 총 갯수 -->
     <select id="getTotalCommentCount" resultType="int">
-        select count(*) from eden_board_comment where board_no = #{board_no}
+        select count(*)
+        from eden_board_comment
+        where board_no = #{board_no}
     </select>
 
     <!-- 댓글 작성 -->
     <insert id="writeComment">
-        insert into eden_board_comment (comment_no, board_no, user_no, comment_content) values (eden_board_comment_seq.nextval, #{board_no}, #{user_no}, #{comment_content})
+        insert into eden_board_comment (comment_no, board_no, user_no, comment_content)
+        values (eden_board_comment_seq.nextval, #{board_no}, #{user_no}, #{comment_content})
     </insert>
+
+    <!-- 댓글 수정 -->
+    <update id="updateComment">
+        update eden_board_comment
+        set comment_content = #{comment_content}
+        where comment_no = #{comment_no}
+          and user_no = #{user_no}
+    </update>
+
+    <!-- 댓글 삭제 -->
+    <delete id="deleteComment">
+        delete
+        from eden_board_comment
+        where comment_no = #{comment_no}
+    </delete>
+
+    <!-- 댓글 전체 삭제-->
+    <delete id="deleteAllComment">
+        delete
+        from eden_board_comment
+        where board_no = #{boardNo}
+    </delete>
 </mapper>

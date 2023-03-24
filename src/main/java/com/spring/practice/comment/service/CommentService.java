@@ -27,4 +27,10 @@ public interface CommentService {
     public int getTotalCommentCount(int board_no);
 
     public void writeComment(CommentVo param);
+
+    //  댓글 수정
+    public void updateComment(CommentVo commentVo);
+
+    //  댓글 삭제
+    public void deleteComment(int comment_no);
 }

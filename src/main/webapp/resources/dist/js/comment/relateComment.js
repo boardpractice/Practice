@@ -64,4 +64,67 @@ window.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
+
+    $(".modalModBtn").click(function () {
+        $.ajax({
+            type: "post",
+            url: "../comment/commentModify",
+            data: {
+                comment_no: $(".commentNo").val(),
+                user_no: $(".userNo").val(),
+                comment_content: $(".commentText").val()
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.result == 'fail') {
+                    alert("댓글 수정에 실패 하였습니다 다시 확인해주세요");
+                } else {
+                    alert("댓글 수정에 성공 하였습니다.");
+                    $('modModal').modal('hide');
+                    location.reload();
+                }
+            }
+        });
+    });
+
+    $(".modalDelBtn").click(function () {
+        $.ajax({
+            type: "post",
+            url: "../comment/deleteComment",
+            data: {
+                comment_no: $(".commentNo").val()
+            },
+            dataType: "json",
+            success: function (data) {
+                alert("댓글 삭제가 완료 되었습니다.");
+                $('delModal').modal('hide');
+                location.reload();
+            }
+        })
+    });
 });
+
+/** 댓글 수정 모둘 출력*/
+function modifyComment(commentNo, userNo) {
+    var comment = $(".commentDiv");
+    if (confirm('해당 댓글을 수정 하시겠습니까??')) {
+        $('.commentNo').val(commentNo);
+        $('.userNo').val(userNo);
+        $('#modModal').modal('show');
+        $('#modModal').on('shown.bs.modal', function (e) {
+            $('.commentText').val(comment.find('.oldReplytext').text());
+        });
+    } else {
+        location.reload();
+    }
+}
+
+function deleteComment(commentNo) {
+    if (confirm('해당 댓글을 삭제 하시겠습니까??')) {
+        $('.commentNo').val(commentNo);
+        $('#delModal').modal('show');
+    } else {
+        location.reload();
+    }
+}

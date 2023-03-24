@@ -200,4 +200,11 @@ public class BoardDAOImpl implements BoardDAO {
 
         return sqlSession.selectOne(NAMESPACE + ".getBoardCount", param);
     }
+
+    //  게시글 좋아요 전체 삭제
+    @Override
+    @LogException
+    public void deleteAllLike(int boardNo) {
+        sqlSession.delete(NAMESPACE + ".deleteAllLike", boardNo);
+    }
 }

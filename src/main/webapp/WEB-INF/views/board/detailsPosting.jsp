@@ -197,3 +197,45 @@ Purpose : Web Details Posting View Page
 <%@ include file="../include/plugin_js.jsp" %>
 </body>
 </html>
+
+<div class="modal fade" id="modModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">댓글수정</h4>
+            </div>
+            <div class="modal-body" data-rno>
+                <input type="hidden" class="commentNo"/>
+                <input type="hidden" class="userNo"/>
+                <%--<input type="text" id="replytext" class="form-control"/>--%>
+                <textarea class="form-control commentText" rows="3" style="resize: none"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary modalModBtn">수정</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">댓글 삭제</h4>
+            </div>
+            <div class="modal-body" data-rno>
+                <p>댓글을 삭제하시겠습니까?</p>
+                <input type="hidden" class="commentNo"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">아니요.</button>
+                <button type="button" class="btn btn-primary modalDelBtn">네. 삭제합니다.</button>
+            </div>
+        </div>
+    </div>
+</div>

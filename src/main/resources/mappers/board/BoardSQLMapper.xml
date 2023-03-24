@@ -248,4 +248,9 @@
             </choose>
         </if>
     </select>
+
+    <!-- 게시글 좋아요 전체 삭제 -->
+    <delete id="deleteAllLike">
+        delete from eden_board_like where board_no = #{boardNo}
+    </delete>
 </mapper>

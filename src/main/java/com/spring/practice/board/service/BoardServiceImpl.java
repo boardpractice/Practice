@@ -15,6 +15,7 @@ package com.spring.practice.board.service;
 
 import com.spring.practice.board.domain.*;
 import com.spring.practice.board.persistence.BoardDAO;
+import com.spring.practice.comment.persistence.CommentDAO;
 import com.spring.practice.commons.annotation.LogException;
 import com.spring.practice.user.domain.UserVo;
 import com.spring.practice.user.persistence.UserDAO;
@@ -33,6 +34,9 @@ public class BoardServiceImpl implements BoardService {
 
     @Autowired
     UserDAO userDAO;
+
+    @Autowired
+    CommentDAO commentDAO;
 
     //  게시글 목록
 
@@ -88,11 +92,13 @@ public class BoardServiceImpl implements BoardService {
         BoardVo boardVo = boardDAO.getBoardByNo(board_no);
         UserVo userVo = userDAO.getUserByNo(boardVo.getUser_no());
         int totalLikeCount = boardDAO.getTotalLikeCount(board_no);
+        int totalCommentCount = commentDAO.getTotalCommentCount(board_no);
 
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("userVo", userVo);
         map.put("boardVo", boardVo);
         map.put("totalLikeCount", totalLikeCount);
+        map.put("totalCommentCount", totalCommentCount);
 
         return map;
     }
@@ -166,6 +172,12 @@ public class BoardServiceImpl implements BoardService {
 
         //  게시글 조회수 중복 체크 삭제
         boardDAO.deleteViewPage(boardNo);
+
+        //  게시글 좋아요 전체 삭제
+        boardDAO.deleteAllLike(boardNo);
+
+        //  게시글 댓글 삭제
+        commentDAO.deleteAllComment(boardNo);
 
         //  게시글 삭제
         boardDAO.deletePosting(boardNo);
