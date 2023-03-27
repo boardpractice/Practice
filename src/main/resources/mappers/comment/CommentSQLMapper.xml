@@ -44,4 +44,32 @@
         from eden_board_comment
         where board_no = #{boardNo}
     </delete>
+
+    <!-- 댓글 좋아요 -->
+    <insert id="doCommentLike">
+        insert into eden_board_comment_like (comment_like_no, comment_no, user_no)
+        values (eden_board_comment_like_seq.nextval, #{comment_no}, #{user_no})
+    </insert>
+
+    <!-- 댓글 좋아요 상태 -->
+    <select id="getMyCommentLikeCount" resultType="int">
+        select count(*)
+        from eden_board_comment_like
+        where comment_no = #{comment_no}
+          and user_no = #{user_no}
+    </select>
+
+    <!-- 댓글 좋아요 삭제 -->
+    <delete id="deleteCommentLike">
+        delete
+        from eden_board_comment_like
+        where comment_no = #{comment_no}
+          and user_no = #{user_no}
+    </delete>
+
+    <!-- 댓글 좋아요 총 갯수 -->
+    <select id="getTotalCommentLikeCount" resultType="int">
+        select count(*) from eden_board_comment_like where comment_no = #{comment_no}
+    </select>
+
 </mapper>

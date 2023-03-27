@@ -13,6 +13,7 @@
 
 package com.spring.practice.comment.persistence;
 
+import com.spring.practice.comment.domain.CommentLikeVo;
 import com.spring.practice.comment.domain.CommentVo;
 import com.spring.practice.commons.annotation.LogException;
 import org.apache.ibatis.session.SqlSession;
@@ -69,5 +70,33 @@ public class CommentDAOImpl implements CommentDAO {
     @LogException
     public void deleteAllComment(int boardNo) {
         sqlSession.delete(NAMESPACE + ".deleteAllComment", boardNo);
+    }
+
+    //  댓글 좋아요
+    @Override
+    @LogException
+    public void doCommentLike(CommentLikeVo like) {
+        sqlSession.insert(NAMESPACE + ".doCommentLike", like);
+    }
+
+    //  댓글 좋아요 상태
+    @Override
+    @LogException
+    public int getMyCommentLikeCount(CommentLikeVo like) {
+        return sqlSession.selectOne(NAMESPACE + ".getMyCommentLikeCount", like);
+    }
+
+    //  댓글 좋아요 삭제
+    @Override
+    @LogException
+    public void deleteCommentLike(CommentLikeVo like) {
+        sqlSession.delete(NAMESPACE + ".deleteCommentLike", like);
+    }
+
+    //  댓글 좋아요 총 갯수
+    @Override
+    @LogException
+    public int getTotalCommentLikeCount(int comment_no) {
+        return sqlSession.selectOne(NAMESPACE + ".getTotalCommentLikeCount", comment_no);
     }
 }

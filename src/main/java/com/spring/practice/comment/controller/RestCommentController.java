@@ -13,6 +13,7 @@
 
 package com.spring.practice.comment.controller;
 
+import com.spring.practice.comment.domain.CommentLikeVo;
 import com.spring.practice.comment.domain.CommentVo;
 import com.spring.practice.comment.service.CommentService;
 import com.spring.practice.commons.annotation.LogException;
@@ -82,6 +83,48 @@ public class RestCommentController {
     public HashMap<String, Object> deleteComment(int comment_no) {
 
         commentService.deleteComment(comment_no);
+
+        return data;
+    }
+
+    //  댓글 좋아요
+    @PostMapping(value = "doCommentLike")
+    @LogException
+    public HashMap<String, Object> doCommentLike(CommentLikeVo param, HttpSession session) {
+
+        UserVo sessionUser = (UserVo) session.getAttribute("sessionUser");
+
+        if (sessionUser == null) {
+            data.put("result", "error");
+            data.put("reason", "로그인이 필요합니다.");
+            return data;
+        }
+
+        int myLikeCount = commentService.getMyCommentLikeCount(param);
+
+        data.put("result", "success");
+
+        if (myLikeCount < 1) {
+            data.put("status", "like");
+        } else {
+            data.put("status", "unlike");
+        }
+
+        int userNo = sessionUser.getUser_no();
+        param.setUser_no(userNo);
+
+        commentService.doCommentLike(param);
+
+        return data;
+    }
+
+    //  댓글 추천 총 갯수
+    @PostMapping(value = "getTotalCommentLikeCount")
+    @LogException
+    public HashMap<String, Object> getTotalCommentLikeCount(int comment_no) {
+
+        int totalCommentLikeCount = commentService.getTotalCommentLikeCount(comment_no);
+        data.put("totalCommentLikeCount", totalCommentLikeCount);
 
         return data;
     }

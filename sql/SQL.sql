@@ -210,5 +210,20 @@ create table eden_board_comment(
 drop sequence eden_board_comment_seq;
 create sequence eden_board_comment_seq;
 
+--  게시글 코멘트 좋아요
+drop table eden_board_comment_like;
+create table eden_board_comment_like(
+    comment_like_no number primary key,
+    comment_no number,
+    user_no number,
+    comment_like_date date default sysdate,
+    constraint likeCommentNo foreign key(comment_no) references eden_board_comment(comment_no),
+    constraint likeUserNo foreign key (user_no) references eden_user(user_no)
+);
+
+--  게시글 코멘트 좋아요 시퀸스
+drop sequence eden_board_comment_like_seq;
+create sequence eden_board_comment_like_seq;
+
 commit;
 

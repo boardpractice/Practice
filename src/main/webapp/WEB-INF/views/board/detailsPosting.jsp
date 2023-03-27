@@ -173,7 +173,15 @@ Purpose : Web Details Posting View Page
                             </div>
                             <div class="oldReplytext">${comment.commentVo.comment_content}</div>
                             <br>
-
+                            <c:if test="${!empty sessionUser}">
+                                <a class="pull-left link-black text-sm commentLike"
+                                   onclick="doCommentLike(${comment.commentVo.comment_no}, ${sessionUser.user_no});">
+                                    <i class="fa fa-thumbs-o-up" id="likeCheck"></i> 추천
+                                </a>
+                                <a class="pull-right link-danger text-sm totalCommentLikeCount" style="color : red;">
+                                    추천수 : (${comment.totalCommentLikeCount})
+                                </a>
+                            </c:if>
                             <hr style="border : 0px; border-top: 5px #2e383c;"/>
                         </c:forEach>
                     </div>

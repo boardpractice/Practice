@@ -13,6 +13,7 @@
 
 package com.spring.practice.comment.persistence;
 
+import com.spring.practice.comment.domain.CommentLikeVo;
 import com.spring.practice.comment.domain.CommentVo;
 
 import java.util.List;
@@ -35,4 +36,17 @@ public interface CommentDAO {
 
     //  댓글 전체 삭제
     public void deleteAllComment(int boardNo);
+
+
+    //  댓글 좋아요
+    public void doCommentLike(CommentLikeVo like);
+
+    //  댓글 좋아요 상태
+    public int getMyCommentLikeCount(CommentLikeVo like);
+
+    //  댓글 좋아요 삭제
+    public void deleteCommentLike(CommentLikeVo like);
+
+    //  댓글 좋아요 총 갯수
+    public int getTotalCommentLikeCount(int comment_no);
 }

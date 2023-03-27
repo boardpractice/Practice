@@ -58,12 +58,14 @@ public class BoardServiceImpl implements BoardService {
             UserVo userVo = userDAO.getUserByNo(userNo);
             CategoryVo categoryVo = boardDAO.getCategoryByNo(boardVo.getCategory_no());
             int totalLikeCount = boardDAO.getTotalLikeCount(boardVo.getBoard_no());
+            int totalCommentCount = commentDAO.getTotalCommentCount(boardVo.getBoard_no());
 
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("boardVo", boardVo);
             map.put("userVo", userVo);
             map.put("categoryVo", categoryVo);
             map.put("totalLikeCount", totalLikeCount);
+            map.put("totalCommentCount", totalCommentCount);
 
             data.add(map);
         }
@@ -98,7 +100,6 @@ public class BoardServiceImpl implements BoardService {
         map.put("userVo", userVo);
         map.put("boardVo", boardVo);
         map.put("totalLikeCount", totalLikeCount);
-        map.put("totalCommentCount", totalCommentCount);
 
         return map;
     }

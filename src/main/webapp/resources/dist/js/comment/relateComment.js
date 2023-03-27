@@ -128,3 +128,42 @@ function deleteComment(commentNo) {
         location.reload();
     }
 }
+
+function doCommentLike(commentNo, userNo) {
+    $.ajax({
+        type: "post",
+        url: "../comment/doCommentLike",
+        data: {
+            user_no: userNo,
+            comment_no: commentNo
+        },
+        dataType: "json",
+        success: function (data) {
+            if (data.status == 'like') {
+                alert("댓글 추천 하였습니다.");
+                $("#likeCheck").attr("class", "fa fa-thumbs-o-down");
+                totalCommentLikeCount(commentNo);
+                location.reload();
+            } else if (data.status == 'unlike') {
+                alert("댓글 추천을 취소 하였습니다.");
+                $("#likeCheck").attr("class", "fa fa-thumbs-o-up");
+                totalCommentLikeCount(commentNo);
+                location.reload();
+            }
+        }
+    });
+}
+
+function totalCommentLikeCount(commentNo) {
+    $.ajax({
+        type: "post",
+        url: "../comment/getTotalCommentLikeCount",
+        data: {
+            comment_no: commentNo
+        },
+        dataType: "json",
+        success: function (data) {
+            $(".commentLike").find(".totalCommentLikeCount").html("(" + data.totalCommentLikeCount + ")");
+        }
+    });
+}
