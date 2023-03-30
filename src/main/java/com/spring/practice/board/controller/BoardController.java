@@ -43,7 +43,7 @@ public class BoardController {
     public String postingList(@RequestParam(value = "category_no", defaultValue = "0") int category_no, Model model, @RequestParam(value = "search_category_no", defaultValue = "0") int search_category_no, @RequestParam(value = "keyword", defaultValue = "") String keyword, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
 
         ArrayList<HashMap<String, Object>> dataList = boardService.getBoardList(category_no, search_category_no, keyword, pageNum);
-        int count = boardService.getBoardCount(search_category_no, keyword);
+        int count = boardService.getBoardCount(category_no, search_category_no, keyword);
 
         int totalPageCount = (int) Math.ceil(count / 10.0);
 
@@ -59,7 +59,6 @@ public class BoardController {
         model.addAttribute("endPage", endPage);
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("totalPageCount", totalPageCount);
-
         model.addAttribute("category_no", category_no);
         model.addAttribute("dataList", dataList);
         model.addAttribute("list", boardService.getBoardSearchCategoryList());

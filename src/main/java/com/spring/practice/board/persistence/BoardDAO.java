@@ -82,7 +82,7 @@ public interface BoardDAO {
     public List<SearchCategoryVo> getBoardSearchCategoryList();
 
     //  게시글 총 갯수
-    public int getBoardCount(int search_category_no, String keyword);
+    public int getBoardCount(int category_no, int search_category_no, String keyword);
 
     //  게시글 좋아요 전체 삭제
     public void deleteAllLike(int boardNo);

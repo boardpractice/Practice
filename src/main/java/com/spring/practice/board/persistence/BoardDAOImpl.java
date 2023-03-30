@@ -193,10 +193,11 @@ public class BoardDAOImpl implements BoardDAO {
     //  게시글 총 갯수
     @Override
     @LogException
-    public int getBoardCount(int search_category_no, String keyword) {
+    public int getBoardCount(int category_no, int search_category_no, String keyword) {
         HashMap<String, Object> param = new HashMap<String, Object>();
+        param.put("category_no", category_no);
         param.put("search_category_no", search_category_no);
-        param.put("keyword", "keyword");
+        param.put("keyword", keyword);
 
         return sqlSession.selectOne(NAMESPACE + ".getBoardCount", param);
     }

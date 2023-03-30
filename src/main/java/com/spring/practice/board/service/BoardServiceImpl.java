@@ -219,8 +219,8 @@ public class BoardServiceImpl implements BoardService {
     //  게시글 총 갯수
     @Override
     @LogException
-    public int getBoardCount(int search_category_no, String keyword) {
-        return boardDAO.getBoardCount(search_category_no, keyword);
+    public int getBoardCount(int category_no, int search_category_no, String keyword) {
+        return boardDAO.getBoardCount(category_no, search_category_no, keyword);
     }
 
     //  내가 작성한 게시글

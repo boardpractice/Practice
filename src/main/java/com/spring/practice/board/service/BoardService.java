@@ -75,7 +75,7 @@ public interface BoardService {
     public List<SearchCategoryVo> getBoardSearchCategoryList();
 
     //  게시글 총 갯수
-    public int getBoardCount(int search_category_no, String keyword);
+    public int getBoardCount(int category_no, int search_category_no, String keyword);
 
     //  내가 작성한 글
     public ArrayList<HashMap<String, Object>> getMyPostList(int user_no);

@@ -212,6 +212,9 @@
     <select id="getBoardCount" resultType="int">
         select count(*) FROM eden_board eb , eden_user eu
         where eb.user_no = eu.user_no
+        <if test="category_no != 0">
+            and eb.category_no = #{category_no}
+        </if>
         <if test="search_category_no != 0">
             <choose>
                 <!-- 게시글 제목 검색 -->
