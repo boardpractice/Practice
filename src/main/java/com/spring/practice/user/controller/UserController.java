@@ -13,6 +13,9 @@
 
 package com.spring.practice.user.controller;
 
+import com.spring.practice.board.service.BoardService;
+import com.spring.practice.bookmark.service.BookMarkService;
+import com.spring.practice.comment.service.CommentService;
 import com.spring.practice.commons.annotation.LogException;
 import com.spring.practice.user.domain.UserVo;
 import com.spring.practice.user.service.UserService;
@@ -24,6 +27,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @Controller
 @RequestMapping(value = "/user/*")
@@ -31,6 +36,15 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    BoardService boardService;
+
+    @Autowired
+    BookMarkService bookMarkService;
+
+    @Autowired
+    CommentService commentService;
 
     //  회원가입 페이지
     @GetMapping(value = "register")
@@ -63,7 +77,19 @@ public class UserController {
     public String profile(Model model, HttpSession session) {
         UserVo sessionUser = (UserVo) session.getAttribute("sessionUser");
 
+        /* 내가 북마크한 게시글 */
+        ArrayList<HashMap<String, Object>> dataList = bookMarkService.getBookMarkList(sessionUser.getUser_no());
+
+        /* 내가 작성한 게시글 */
+        ArrayList<HashMap<String, Object>> myPostList = boardService.getMyPostList(sessionUser.getUser_no());
+
+        /* 내가 작성한 댓글 */
+        ArrayList<HashMap<String, Object>> myCommentList = commentService.getMyCommentList(sessionUser.getUser_no());
+
         model.addAttribute("data", userService.getJoinQuestionList());
+        model.addAttribute("dataList", dataList);
+        model.addAttribute("postList", myPostList);
+        model.addAttribute("commentList", myCommentList);
 
         return "user/profile";
     }

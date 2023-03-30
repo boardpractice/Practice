@@ -83,6 +83,82 @@ Purpose : User Profile Web View Page
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-7">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li><a href="#myBookmarks" data-toggle="tab"><i class="fa fa-bookmark-o"></i> 나의 스크랩</a>
+                            </li>
+                            <li><a href="#myPosts" data-toggle="tab"><i class="fa fa-pencil-square-o"></i>나의 게시글</a>
+                            </li>
+                            <li><a href="#myComment" data-toggle="tab"><i class="fa fa-comment-o"></i>나의 댓글</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane" id="myBookmarks">
+                                <table id="myBookmarksTable" class="table table-bordered table-striped">
+                                    <thead>
+                                    <th>번호</th>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${dataList}" var="data">
+                                        <tr>
+                                            <td>${data.boardVo.board_no}</td>
+                                            <td>
+                                                <a href="javascript:goPage(${data.boardVo.board_no});">${data.boardVo.board_title}</a>
+                                            </td>
+                                            <td>${data.userVo.user_nickname}</td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane" id="myPosts">
+                                <table id="myPostsTable" class="table table-bordered table-striped">
+                                    <thead>
+                                    <th>제목</th>
+                                    <th>작성일시</th>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${postList}" var="post">
+                                        <tr>
+                                            <td>
+                                                <a href="javascript:goPage(${post.boardVo.board_no});">${post.boardVo.board_title }</a>
+                                            </td>
+                                            <td><fmt:formatDate value="${post.boardVo.board_write_date }"
+                                                                pattern="yyyy:MM:dd: HH:mm:ss"/></td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane" id="myComment">
+                                <table id="myCommentsTable" class="table table-bordered table-striped">
+                                    <thead>
+                                    <th>번호</th>
+                                    <th>게시글제목</th>
+                                    <th>댓글내용</th>
+                                    <th>작성시간</th>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${commentList}" var="comment">
+                                        <tr>
+                                            <td>${comment.boardVo.board_no}</td>
+                                            <td>${comment.boardVo.board_title}</td>
+                                            <td>${comment.commentVo.comment_content}</td>
+                                            <td><fmt:formatDate pattern="yyyy-MM-dd a HH:mm"
+                                                                value="${comment.commentVo.comment_write_date}"/></td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>

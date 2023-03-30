@@ -253,4 +253,9 @@
     <delete id="deleteAllLike">
         delete from eden_board_like where board_no = #{boardNo}
     </delete>
+
+    <!-- 내가 작성한 글 목록 -->
+    <select id="getMyPostList" resultType="BoardVo">
+        select * from eden_board where user_no = #{user_no}
+    </select>
 </mapper>

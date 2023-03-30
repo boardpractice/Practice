@@ -49,4 +49,7 @@ public interface CommentDAO {
 
     //  댓글 좋아요 총 갯수
     public int getTotalCommentLikeCount(int comment_no);
+
+    //  내가 작성한 댓글
+    public List<CommentVo> getMyCommentList(int user_no);
 }

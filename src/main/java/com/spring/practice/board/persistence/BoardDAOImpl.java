@@ -207,4 +207,11 @@ public class BoardDAOImpl implements BoardDAO {
     public void deleteAllLike(int boardNo) {
         sqlSession.delete(NAMESPACE + ".deleteAllLike", boardNo);
     }
+
+    //  내가 작성한 게시글
+    @Override
+    @LogException
+    public List<BoardVo> getMyPostList(int user_no) {
+        return sqlSession.selectList(NAMESPACE + ".getMyPostList", user_no);
+    }
 }

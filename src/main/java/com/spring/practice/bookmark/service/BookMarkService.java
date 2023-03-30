@@ -15,6 +15,9 @@ package com.spring.practice.bookmark.service;
 
 import com.spring.practice.bookmark.domain.BookMarkVo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public interface BookMarkService {
 
     //  게시글 북마크 등록
@@ -22,4 +25,7 @@ public interface BookMarkService {
 
     //  게시글 북마크 상태
     public int getMyBookMarkStatus(BookMarkVo param);
+
+    //  내가 북마크한 게시글
+    public ArrayList<HashMap<String, Object>> getBookMarkList(int user_no);
 }

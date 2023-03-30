@@ -26,4 +26,9 @@
         where board_no = #{boardNo}
           and user_no = #{userNo}
     </delete>
+
+    <!-- 내가 북마크한 게시글 -->
+    <select id="getBookMarkList" resultType="BookMarkVo">
+        select * from eden_book_mark where user_no = #{user_no}
+    </select>
 </mapper>

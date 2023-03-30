@@ -15,6 +15,8 @@ package com.spring.practice.bookmark.persistence;
 
 import com.spring.practice.bookmark.domain.BookMarkVo;
 
+import java.util.List;
+
 public interface BookMarkDAO {
 
     //  게시글 북마크 등록
@@ -25,4 +27,7 @@ public interface BookMarkDAO {
 
     //  게시글 북마크 취소
     public void deleteBookMark(int board_no, int user_no);
+
+    //  내가 북마크한 게시글
+    public List<BookMarkVo> getBookMarkList(int user_no);
 }

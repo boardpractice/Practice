@@ -86,4 +86,7 @@ public interface BoardDAO {
 
     //  게시글 좋아요 전체 삭제
     public void deleteAllLike(int boardNo);
+
+    //  내가 작성한 글목록
+    public List<BoardVo> getMyPostList(int user_no);
 }

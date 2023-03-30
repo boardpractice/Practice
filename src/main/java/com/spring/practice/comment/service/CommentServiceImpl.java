@@ -13,6 +13,8 @@
 
 package com.spring.practice.comment.service;
 
+import com.spring.practice.board.domain.BoardVo;
+import com.spring.practice.board.persistence.BoardDAO;
 import com.spring.practice.comment.domain.CommentLikeVo;
 import com.spring.practice.comment.domain.CommentVo;
 import com.spring.practice.comment.persistence.CommentDAO;
@@ -35,6 +37,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     UserDAO userDAO;
+
+    @Autowired
+    BoardDAO boardDAO;
 
     //  댓글 목록
     @Override
@@ -110,5 +115,25 @@ public class CommentServiceImpl implements CommentService {
     @LogException
     public int getTotalCommentLikeCount(int comment_no) {
         return commentDAO.getTotalCommentLikeCount(comment_no);
+    }
+
+    //  내가 작성한 댓글
+    @Override
+    @LogException
+    public ArrayList<HashMap<String, Object>> getMyCommentList(int user_no) {
+        ArrayList<HashMap<String, Object>> dataList = new ArrayList<HashMap<String, Object>>();
+        List<CommentVo> commentVoList = commentDAO.getMyCommentList(user_no);
+
+        for (CommentVo commentVo : commentVoList) {
+            BoardVo boardVo = boardDAO.getBoardByNo(commentVo.getBoard_no());
+            UserVo userVo = userDAO.getUserByNo(user_no);
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            map.put("boardVo", boardVo);
+            map.put("userVo", userVo);
+            map.put("commentVo", commentVo);
+
+            dataList.add(map);
+        }
+        return dataList;
     }
 }

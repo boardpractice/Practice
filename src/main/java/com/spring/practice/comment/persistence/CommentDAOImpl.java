@@ -99,4 +99,11 @@ public class CommentDAOImpl implements CommentDAO {
     public int getTotalCommentLikeCount(int comment_no) {
         return sqlSession.selectOne(NAMESPACE + ".getTotalCommentLikeCount", comment_no);
     }
+
+    //  내가 작성한 댓글
+    @Override
+    @LogException
+    public List<CommentVo> getMyCommentList(int user_no) {
+        return sqlSession.selectList(NAMESPACE + ".getMyCommentList", user_no);
+    }
 }
